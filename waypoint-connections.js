@@ -180,7 +180,7 @@ function events(){
  },true);
 }
 function init(){
- ensure();save();brand();setupPages();events();
+ ensure();save();renderProfile();brand();setupPages();events();
  const existing=$('#assistantSection .chat-head b');if(existing)existing.textContent='Travel assistant';
  const subtitle=$('#assistantSection .assistant-side h2');if(subtitle)subtitle.textContent='Your travel assistant';
  const blurb=$('#assistantSection .assistant-side p');if(blurb)blurb.textContent='Clear answers for the trip you are planning. AI is optional; clarity comes first.';
