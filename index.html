@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#07111f" />
-  <meta name="description" content="Waypoint — AI travel companion prototype" />
+  <meta name="description" content="Waypoint V2 — travel less complicated. Three trips free. Flights, money, plans and AI in one beautifully simple travel app." />
   <title>Waypoint V2 — Your AI Travel Companion</title>
   <style>/* Waypoint full prototype */
 :root{
@@ -54,6 +54,74 @@
 </style>
   <link rel="stylesheet" href="/waypoint-v2.css" />
   <link rel="stylesheet" href="/waypoint-v2-extra.css" />
+
+<style id="wp-v2-landing">
+/* First-screen redesign — visibly different from V1, shared by all V2 deployments */
+.site-header{background:#f7f9fd!important;border-bottom:1px solid #dce5ed!important;backdrop-filter:none!important}
+.site-header .brand{color:#14273d!important}
+.site-header .brand-mark{background:#0e2843;color:#9af8eb;box-shadow:none}
+.site-header .public-nav button{color:#52657b!important}
+.site-header .public-nav button:hover{color:#0e2741!important}
+.site-header .header-actions .ghost{border-color:#d1dae3;background:#fff;color:#18324a}
+.site-header .header-actions .primary{background:#132e4c;box-shadow:none;color:#fff}
+.wp-v2-hero{display:grid;grid-template-columns:48% 52%;gap:0;padding:0!important;min-height:740px;background:#f7f9fd!important;color:#112840!important;overflow:hidden;align-items:stretch!important}
+.wp-v2-hero-left{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:90px 5vw 100px 6vw;z-index:2}
+.wp-v2-hero-eyebrow{display:flex;align-items:center;gap:11px;color:#406e8c;font-size:10px;font-weight:860;letter-spacing:.12em;white-space:nowrap}
+.wp-v2-live-dot{height:8px;width:8px;background:#2bbaa3;border-radius:50%;box-shadow:0 0 0 5px rgba(43,186,163,.11)}
+.wp-v2-hero-divider{width:1px;height:14px;background:#ccd7df}
+.wp-v2-hero-left h1{margin:25px 0 24px;font-size:clamp(56px,6.3vw,98px);font-weight:870;line-height:.97;letter-spacing:-.075em}
+.wp-v2-hero-left h1 span{color:#178ca0!important;-webkit-text-fill-color:#178ca0;background:none!important}
+.wp-v2-hero-left p{font-size:clamp(16px,1.35vw,19px);color:#536d82;line-height:1.7;max-width:510px;margin:0 0 31px}
+.wp-v2-hero-left .hero-actions{gap:11px}
+.wp-v2-hero-left .hero-actions button{border-radius:12px;min-height:53px;font-size:13px;transition:transform .2s ease}
+.wp-v2-hero-left .hero-actions button:hover{transform:translateY(-2px)}
+.wp-v2-hero-left .hero-actions .primary{background:#15324e;color:#fff;box-shadow:0 10px 20px rgba(19,51,79,.13)}
+.wp-v2-hero-left .hero-actions .ghost{color:#1c425b;background:#fff;border:1px solid #cbdce7}
+.wp-v2-hero-proof{display:flex;gap:18px;flex-wrap:wrap;margin-top:43px;color:#47697d;font-weight:660;font-size:12px}
+.wp-v2-footnote{font-size:11px;color:#8194a6;margin-top:26px}
+.wp-v2-hero-right{min-width:0;position:relative;background:radial-gradient(circle at 50% 30%,#224e70,#0b253d 60%,#081a2b);display:grid;place-items:center;padding:50px 6.5vw 62px 4.5vw}
+.wp-v2-preview-glow{position:absolute;width:520px;height:520px;border-radius:50%;background:#5bcaef;filter:blur(120px);opacity:.12}
+.wp-v2-browser{position:relative;z-index:1;width:min(100%,620px);border:1px solid rgba(196,235,255,.22);background:#0b1f32;border-radius:20px;box-shadow:0 40px 90px rgba(0,8,19,.58);overflow:hidden;transform:rotate(-1deg)}
+.wp-v2-browser-top{height:57px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#091b2c;border-bottom:1px solid rgba(255,255,255,.08)}
+.wp-v2-browser-logo{font-size:13px;color:#e8f9ff;font-weight:900;letter-spacing:.04em}
+.wp-v2-browser-logo small{font-size:9px;color:#64e1d9;border:1px solid rgba(104,236,222,.3);padding:2px 4px;border-radius:4px}
+.wp-v2-browser-nav{color:#9bb2c6;font-size:10px;letter-spacing:.03em}
+.wp-v2-browser-avatar{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:linear-gradient(140deg,#498df0,#62daca);font-size:9px;font-weight:800;color:#071627}
+.wp-v2-browser-content{padding:27px 25px 22px}
+.wp-v2-browser-eyebrow{font-size:9px;font-weight:850;letter-spacing:.13em;color:#6ce0d5}
+.wp-v2-browser-heading{font-size:28px;color:#f5fbff;font-weight:850;letter-spacing:-.045em;margin:9px 0 4px}
+.wp-v2-browser-sub{color:#9fb4c6;font-size:11px;margin-bottom:19px}
+.wp-v2-flight-preview{padding:20px 19px;background:linear-gradient(135deg,#174569,#113252);border:1px solid rgba(123,207,235,.15);border-radius:14px}
+.wp-v2-preview-top{display:flex;justify-content:space-between;gap:8px;align-items:center;color:#eaf7ff;font-size:12px}
+.wp-v2-preview-top span{font-size:8px;font-weight:850;letter-spacing:.06em;color:#7de4d7;background:rgba(70,216,182,.12);border:1px solid rgba(107,226,208,.17);padding:5px 7px;border-radius:99px}
+.wp-v2-airports{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:center;margin:26px 0 21px}
+.wp-v2-airports>div:last-child{text-align:right}
+.wp-v2-airports strong{display:block;font-size:34px;line-height:1;color:#f3fcff;letter-spacing:-.04em}
+.wp-v2-airports small{display:block;color:#bad0de;font-size:9px;margin-top:8px}
+.wp-v2-dotted-plane{position:relative;height:1px;background:repeating-linear-gradient(90deg,#74cde4 0 4px,transparent 4px 10px);display:grid;place-items:center}
+.wp-v2-dotted-plane span{position:absolute;color:#76e2e2;font-size:19px;background:#153d61;padding:0 10px}
+.wp-v2-preview-bottom{display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);color:#bbd1e2;font-size:9px}
+.wp-v2-preview-bottom span:last-child{color:#84e4ed;font-weight:850}
+.wp-v2-dash-panels{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px}
+.wp-v2-insight-preview{padding:17px;border-radius:13px;background:#102b43;border:1px solid rgba(255,255,255,.08);position:relative}
+.wp-v2-panel-icon{display:grid;place-items:center;font-size:17px;width:29px;height:29px;margin-bottom:12px;background:rgba(92,166,246,.13);color:#77c8ff;border-radius:9px}
+.wp-v2-insight-preview small{display:block;font-size:8px;color:#89afc3;letter-spacing:.09em}
+.wp-v2-insight-preview strong{display:block;color:#f3f9ff;font-size:12px;margin:6px 0}
+.wp-v2-insight-preview p{font-size:10px;color:#a3b9cb;line-height:1.6;margin:0;min-height:49px}
+.wp-v2-micro-link{font-size:9px;color:#7bdddf;font-weight:800}
+.wp-v2-preview-footer{display:flex;justify-content:space-between;margin-top:17px;color:#abc6d2;font-size:10px}
+.wp-v2-preview-footer i{display:inline-block;width:6px;height:6px;background:#72ded1;border-radius:50%;margin-right:5px}
+.wp-v2-float-label{z-index:2;position:absolute;display:flex;gap:10px;align-items:center;padding:11px 14px;border-radius:12px;background:#f8fcff;box-shadow:0 18px 30px rgba(4,18,28,.24)}
+.wp-v2-float-label>span{font-size:21px;color:#157d9a}
+.wp-v2-float-label small{display:block;color:#698197;font-size:8px;letter-spacing:.08em}
+.wp-v2-float-label b{display:block;font-size:11px;color:#173149;margin-top:3px}
+.wp-v2-float-one{right:3%;top:15%}
+.wp-v2-float-two{bottom:13%;left:1%}
+@media(max-width:1120px){.wp-v2-hero-left{padding-left:5vw}.wp-v2-hero-left h1{font-size:clamp(55px,6.8vw,80px)}.wp-v2-float-label{display:none}.wp-v2-hero-right{padding:30px}}
+@media(max-width:850px){.wp-v2-hero{grid-template-columns:1fr!important;min-height:unset}.wp-v2-hero-left{padding:60px 6vw 54px}.wp-v2-hero-left h1{font-size:clamp(50px,10vw,76px)}.wp-v2-hero-right{padding:35px 5vw 55px}.wp-v2-browser{width:min(100%,570px);transform:none}.wp-v2-hero-proof{margin-top:26px}.wp-v2-hero-left p{max-width:600px}.site-header .public-nav{display:none}}
+@media(max-width:520px){.wp-v2-hero-left{padding-top:52px}.wp-v2-hero-eyebrow{font-size:9px;gap:7px}.wp-v2-hero-left h1{font-size:55px}.wp-v2-hero-left .hero-actions{width:100%;flex-direction:column}.wp-v2-hero-left .hero-actions button{width:100%}.wp-v2-browser-content{padding:20px 13px}.wp-v2-browser-heading{font-size:24px}.wp-v2-flight-preview{padding:15px}.wp-v2-airports strong{font-size:26px}.wp-v2-airports small{font-size:8px}.wp-v2-insight-preview{padding:12px}.wp-v2-dash-panels{gap:8px}.wp-v2-browser-nav{display:none}.wp-v2-hero-proof{gap:11px}.wp-v2-hero-proof span{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.wp-v2-hero-left .hero-actions button{transition:none}.wp-v2-hero-left .hero-actions button:hover{transform:none}}
+</style>
 </head>
 <body>
   <div id="toast" class="toast"></div>
@@ -78,48 +146,36 @@
   <main>
     <!-- PUBLIC LANDING -->
     <section id="landingView" class="public-view">
-      <section class="hero">
-        <div class="hero-copy">
-          <div class="kicker">AI travel companion</div>
-          <h1>Your entire travel life, <span>in one place.</span></h1>
-          <p>Waypoint brings bookings, sample flight maps, refunds, destination tools and a trip-aware assistant into one beautifully simple experience. Connected airline, loyalty and live AI services are coming next.</p>
+      <section class="hero wp-v2-hero">
+        <div class="wp-v2-hero-left">
+          <div class="wp-v2-hero-eyebrow"><span class="wp-v2-live-dot"></span> WAYPOINT 2.0 <span class="wp-v2-hero-divider"></span> THE TRAVEL COMMAND CENTER</div>
+          <h1>Travel less<br><span>complicated.</span></h1>
+          <p>Your flights, plans, travel money and answers — finally in one beautifully simple place. Know what changed. Know what's next.</p>
           <div class="hero-actions">
-            <button class="primary large" id="heroStart">Start with demo</button>
-            <button class="ghost large" id="heroTour">Explore the product</button>
+            <button class="primary large" id="heroStart">Start your 3 free trips <span aria-hidden="true">↗</span></button>
+            <button class="ghost large" id="heroTour">Explore features ↓</button>
           </div>
-          <div class="proof-row">
-            <span>✓ Trips</span><span>✓ Flight tracking</span><span>✓ Loyalty</span><span>✓ Travel money</span>
-          </div>
+          <div class="wp-v2-hero-proof"><span>✧ Three trips free</span><span>↗ One travel dashboard</span><span>◇ Refund intelligence</span></div>
+          <div class="wp-v2-footnote">Interactive prototype · sample travel data · no real bookings or charges</div>
         </div>
-        <div class="hero-product">
-          <div class="phone-shell phone-main">
-            <div class="phone-top">9:41 <span>•••</span></div>
-            <div class="mini-app">
-              <div class="mini-head"><b>Good evening, Alex</b><span>◉</span></div>
-              <div class="mini-sub">Next stop: Sydney</div>
-              <div class="mini-flight">
-                <div class="mini-flight-head"><span>QF128</span><span class="badge ok">On time</span></div>
-                <div class="mini-route"><div><b>HKG</b><small>19:30</small></div><span>→</span><div><b>SYD</b><small>07:45</small></div></div>
-                <div class="mini-meta"><span>T1</span><span>Gate 23</span><span>40D</span></div>
+        <div class="wp-v2-hero-right" aria-label="Preview of the redesigned Waypoint dashboard">
+          <div class="wp-v2-preview-glow"></div>
+          <div class="wp-v2-browser">
+            <div class="wp-v2-browser-top"><span class="wp-v2-browser-logo">◈ &nbsp; WAYPOINT <small>V2</small></span><span class="wp-v2-browser-nav">⌂ &nbsp; Trips &nbsp; ⌖ &nbsp; AI &nbsp; •••</span><span class="wp-v2-browser-avatar">AM</span></div>
+            <div class="wp-v2-browser-content">
+              <div class="wp-v2-browser-eyebrow">✳ &nbsp; YOUR TRAVEL, ONE PLACE</div>
+              <div class="wp-v2-browser-heading">Good to have you here.</div>
+              <div class="wp-v2-browser-sub">Your next adventure starts with a clear plan.</div>
+              <div class="wp-v2-flight-preview"><div class="wp-v2-preview-top"><b>Hong Kong → Sydney</b><span>SAMPLE FLIGHT</span></div><div class="wp-v2-airports"><div><strong>HKG</strong><small>19:30 · 09 OCT</small></div><div class="wp-v2-dotted-plane"><span>✈</span></div><div><strong>SYD</strong><small>07:45 · 10 OCT</small></div></div><div class="wp-v2-preview-bottom"><span>QF128 · ECONOMY</span><span>VIEW TRIP ↗</span></div></div>
+              <div class="wp-v2-dash-panels">
+                <div class="wp-v2-insight-preview"><span class="wp-v2-panel-icon">↺</span><small>NEEDS ATTENTION</small><strong>Your seat refund</strong><p>A paid extra-legroom seat was removed after a flight change.</p><span class="wp-v2-micro-link">Check refund →</span></div>
+                <div class="wp-v2-insight-preview"><span class="wp-v2-panel-icon">✦</span><small>YOUR ASSISTANT</small><strong>Ask Waypoint</strong><p>Questions about your trip? Get answers in seconds.</p><span class="wp-v2-micro-link">Start a chat →</span></div>
               </div>
-              <div class="mini-alert">
-                <b>Refund detected</b>
-                <small>Your paid extra-legroom seat was removed after a flight change.</small>
-              </div>
-              <div class="mini-grid">
-                <div><span>✈</span><b>Flight</b><small>On time</small></div>
-                <div><span>⌂</span><b>Hotel</b><small>Check-in 3pm</small></div>
-              </div>
+              <div class="wp-v2-preview-footer"><span><i></i> 0 of 3 free trips used</span><span>Waypoint Free</span></div>
             </div>
           </div>
-          <div class="float-card float-left">
-            <span class="icon-circle">◎</span>
-            <div><small>LOYALTY WALLET</small><b>560,770 pts</b></div>
-          </div>
-          <div class="float-card float-right">
-            <span class="icon-circle">⌁</span>
-            <div><small>HONG KONG eSIM</small><b>10GB · US$12.99</b></div>
-          </div>
+          <div class="wp-v2-float-label wp-v2-float-one"><span>✦</span><div><small>YOUR NEXT ACTION</small><b>Follow up on refund</b></div></div>
+          <div class="wp-v2-float-label wp-v2-float-two"><span>✈</span><div><small>EVERYTHING CONNECTED</small><b>Trips · Money · AI</b></div></div>
         </div>
       </section>
 
