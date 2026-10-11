@@ -192,7 +192,7 @@
     qa('#flightSection .checklist input').forEach(function(el,i){el.checked=!!(state.wp2Checklist&&state.wp2Checklist[i]);el.addEventListener('change',function(){state.wp2Checklist=state.wp2Checklist||{};state.wp2Checklist[i]=el.checked;save()})});
   }
   function boot(){
-    migrate();markupHome();markupMore();billing();improveOnboarding();initAI();checklist();
+    migrate();renderAll();markupHome();markupMore();billing();improveOnboarding();initAI();checklist();
     var title=q('#assistantSection .chat-head b');if(title)title.textContent='Waypoint Concierge';
     var brand=q('.app-brand');if(brand&&!q('#wp2BrandLabel')){var tag=document.createElement('div');tag.id='wp2BrandLabel';tag.textContent='TRAVEL, SIMPLIFIED';brand.appendChild(tag)}
     q('#wp2AddTrip').addEventListener('click',startNewTrip);
@@ -212,7 +212,8 @@
         if(!paid()&&tripsUsed()>=FREE_LIMIT){e.preventDefault();e.stopImmediatePropagation();pendingTripCount=null;showPaywall()}
       }
     },true);
-    var reset=q('#resetDemoBtn');if(reset){reset.addEventListener('click',function(){setTimeout(function(){state.plan='Free';state.wp2TripsUsed=0;state.wp2Version=2;state.wp2Chat=[];save();refreshHome()},0)})}
+    qa('#pricing .plan-btn').forEach(function(b){b.onclick=function(){pickPlan(b.dataset.plan)}});
+    if(location.hash==='#app/more')switchApp('more',false);
     refreshHome();refreshMore();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
