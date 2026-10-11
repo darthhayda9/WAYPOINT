@@ -214,6 +214,8 @@
     },true);
     qa('#pricing .plan-btn').forEach(function(b){b.onclick=function(){pickPlan(b.dataset.plan)}});
     if(location.hash==='#app/more')switchApp('more',false);
+    window.waypointRefreshHome=refreshHome;
+    document.addEventListener('click',function(e){if(e.target.closest('[data-app="dashboard"]'))setTimeout(refreshHome,0)});
     refreshHome();refreshMore();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
