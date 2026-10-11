@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#07111f" />
+  <meta name="description" content="Waypoint — AI travel companion prototype" />
+  <title>Waypoint V1 Investor Demo ·  — AI Travel Companion</title>
+  <style>/* Waypoint full prototype */
+:root{
+  --bg:#07111f;--bg2:#0b1727;--panel:#0f2135;--panel2:#132b45;--card:#142b45;
+  --text:#edf6ff;--muted:#91a6bb;--line:#263f58;--blue:#4d9fff;--blue2:#6d78ff;
+  --cyan:#61dde6;--green:#51d49b;--amber:#ffc965;--red:#ff7777;--white:#fff;
+  --shadow:0 24px 60px rgba(0,0,0,.28);--radius:22px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.site-header{height:76px;position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(7,17,31,.84);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06)}
+.brand{display:inline-flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-size:20px;font-weight:800}.brand-mark{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 9px 28px rgba(77,159,255,.24)}.small-mark{width:28px;height:28px;border-radius:8px}
+.public-nav{display:flex;gap:22px}.public-nav button{background:transparent;border:0;color:var(--muted);font-weight:600}.public-nav button:hover{color:#fff}.header-actions,.hero-actions{display:flex;gap:10px}.primary,.ghost,.danger,.light-btn{border:0;border-radius:13px;padding:11px 16px;font-weight:750}.primary{background:linear-gradient(135deg,var(--blue),var(--blue2));color:white;box-shadow:0 9px 26px rgba(77,159,255,.22)}.ghost{background:rgba(255,255,255,.04);color:#fff;border:1px solid var(--line)}.danger{background:rgba(255,119,119,.12);color:var(--red);border:1px solid rgba(255,119,119,.28)}.large{padding:14px 19px}.full{width:100%}.small-btn{padding:8px 10px;font-size:12px}.icon-btn{padding:9px 11px}
+.hero{min-height:720px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:36px;padding:84px 6vw 72px;background:radial-gradient(circle at 70% 20%,rgba(97,221,230,.14),transparent 24%),radial-gradient(circle at 15% 25%,rgba(77,159,255,.15),transparent 28%),linear-gradient(180deg,#081322,#07111f)}.hero-copy h1{font-size:clamp(48px,6.3vw,88px);line-height:.94;letter-spacing:-.055em;margin:10px 0 24px;max-width:850px}.hero-copy h1 span{background:linear-gradient(135deg,#5ca8ff,#61dde6);-webkit-background-clip:text;color:transparent}.hero-copy p{font-size:19px;line-height:1.65;color:var(--muted);max-width:720px}.kicker{font-size:12px;letter-spacing:.11em;text-transform:uppercase;color:var(--cyan);font-weight:800}.kicker.light{color:#d8fbff}.proof-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:28px;color:#bdd0e2;font-size:14px}.hero-product{position:relative;min-height:560px;display:grid;place-items:center}.phone-shell{width:318px;height:620px;border-radius:46px;background:#03070d;border:8px solid #050a11;box-shadow:0 40px 80px rgba(0,0,0,.45),0 0 0 1px #344b61;overflow:hidden;transform:rotate(-2deg)}.phone-top{height:38px;padding:11px 17px;display:flex;justify-content:space-between;font-size:11px;background:#f7fbff;color:#06101c}.mini-app{height:calc(100% - 38px);padding:18px;background:linear-gradient(180deg,#eef7ff,#f7fbff);color:#07111f}.mini-head{display:flex;justify-content:space-between}.mini-sub{color:#6e8091;font-size:12px;margin:4px 0 14px}.mini-flight{padding:15px;border-radius:18px;color:white;background:linear-gradient(145deg,#123a61,#11679c);box-shadow:0 16px 28px rgba(16,76,118,.25)}.mini-flight-head{display:flex;justify-content:space-between}.mini-route{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin:18px 0}.mini-route div:last-child{text-align:right}.mini-route b{display:block;font-size:24px}.mini-route small{display:block;color:#cde8ff}.mini-meta{display:flex;justify-content:space-between;color:#cde8ff;font-size:11px}.badge{display:inline-flex;align-items:center;justify-content:center;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:850}.badge.ok{color:#5affbc;background:rgba(0,0,0,.18);border:1px solid rgba(90,255,188,.25)}.badge.pending{color:#ffd37b;background:rgba(255,201,101,.1);border:1px solid rgba(255,201,101,.24)}.mini-alert{display:grid;gap:4px;background:#fff0d4;border-radius:15px;padding:13px;margin-top:14px;color:#44310b}.mini-alert small{line-height:1.35}.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.mini-grid>div{display:grid;gap:3px;background:white;border:1px solid #e6edf4;border-radius:14px;padding:12px}.mini-grid span{font-size:20px}.mini-grid small{color:#75889a}.float-card{position:absolute;display:flex;gap:11px;align-items:center;padding:13px 15px;background:rgba(18,40,64,.92);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1);border-radius:16px;box-shadow:var(--shadow)}.float-card small{display:block;color:var(--muted);font-size:10px}.float-card b{display:block;margin-top:3px}.float-left{left:0;bottom:92px}.float-right{right:0;top:105px}.icon-circle{width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:rgba(77,159,255,.15);color:var(--cyan)}
+.section-wrap{padding:96px 6vw;max-width:1500px;margin:auto}.section-heading{max-width:800px;margin-bottom:42px}.section-heading.compact{margin-bottom:28px}.section-heading h2,.split-showcase h2,.airline-section h2{font-size:clamp(34px,4vw,58px);line-height:1.05;letter-spacing:-.04em;margin:9px 0 16px}.section-heading p,.split-showcase p,.airline-section p{color:var(--muted);font-size:18px;line-height:1.6}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature-card{padding:24px;border-radius:var(--radius);background:linear-gradient(180deg,rgba(19,43,69,.9),rgba(12,26,42,.9));border:1px solid rgba(255,255,255,.07)}.feature-icon{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;background:rgba(77,159,255,.14);color:var(--cyan);font-size:20px}.feature-card h3{margin:18px 0 8px}.feature-card p{color:var(--muted);line-height:1.55}.split-showcase{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}.steps{display:grid;gap:18px;margin-top:28px}.step{display:grid;grid-template-columns:40px 1fr;gap:12px}.step>span{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:rgba(77,159,255,.14);color:#cfe8ff;font-weight:850}.step p{font-size:14px;margin:4px 0}.insight-demo{padding:28px;border-radius:28px;background:linear-gradient(155deg,#112944,#0e1e31);border:1px solid rgba(255,255,255,.07);box-shadow:var(--shadow)}.insight-title{font-size:22px;font-weight:800;margin-bottom:14px}.insight-row{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--line)}.insight-row small{display:block;color:var(--muted);margin-top:5px}.signal{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;font-weight:900}.signal.warn{background:rgba(255,201,101,.12);color:var(--amber)}.signal.info{background:rgba(77,159,255,.14);color:var(--blue)}.signal.good{background:rgba(81,212,155,.13);color:var(--green)}.insight-demo .full{margin-top:18px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.price-card{position:relative;padding:25px;border-radius:var(--radius);background:linear-gradient(180deg,#112941,#0e1e31);border:1px solid rgba(255,255,255,.07)}.price-card.featured{outline:2px solid var(--blue);transform:translateY(-6px)}.popular{position:absolute;top:-13px;left:50%;transform:translateX(-50%);padding:5px 10px;border-radius:999px;background:var(--blue);font-size:10px;font-weight:900}.price-name{font-weight:800}.price{font-size:42px;font-weight:900;margin:12px 0}.price small{font-size:14px;color:var(--muted)}.price-card p,.price-card li{color:var(--muted)}.price-card ul{padding-left:18px;line-height:2}.airline-section{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}.airline-card{padding:24px;border-radius:28px;background:linear-gradient(145deg,#e8f4ff,#d6eaff);color:#0a1724}.airline-brand{display:flex;align-items:center;gap:8px;font-weight:850}.airline-msg{margin-top:55px;padding:20px;border-radius:20px;background:white;box-shadow:0 20px 40px rgba(7,17,31,.12)}.airline-msg small{display:block;color:#718296;font-weight:850}.airline-msg b{display:block;font-size:24px;margin:8px 0}.airline-msg p{font-size:14px;color:#5e7081}.footer{display:flex;align-items:center;justify-content:space-between;padding:30px 6vw;border-top:1px solid rgba(255,255,255,.06);color:var(--muted)}
+/* App shell */
+.app-view{display:grid;grid-template-columns:250px 1fr;min-height:100vh;background:#08121f}.app-sidebar{position:sticky;top:0;height:100vh;padding:20px 14px;border-right:1px solid rgba(255,255,255,.06);background:#091626}.app-brand{padding:4px 8px 22px}.app-nav{display:grid;gap:5px}.app-nav button{display:flex;align-items:center;gap:12px;width:100%;padding:11px 12px;border:0;border-radius:12px;background:transparent;color:#93a7ba;text-align:left;font-weight:650}.app-nav button:hover,.app-nav button.active{color:#fff;background:linear-gradient(135deg,rgba(77,159,255,.16),rgba(97,221,230,.08));box-shadow:inset 0 0 0 1px rgba(77,159,255,.16)}.app-nav button span{width:24px;display:grid;place-items:center}.sidebar-plan{position:absolute;left:14px;right:14px;bottom:18px;padding:14px;border-radius:16px;background:#0d2137;border:1px solid rgba(255,255,255,.06)}.sidebar-plan small{display:block;color:var(--muted);font-size:10px}.sidebar-plan b{display:block;margin:4px 0 10px}.app-main{min-width:0}.app-topbar{position:sticky;top:0;z-index:30;height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:rgba(8,18,31,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06)}.app-page-title{font-size:18px;font-weight:850}.app-page-sub{font-size:12px;color:var(--muted);margin-top:2px}.app-actions{display:flex;align-items:center;gap:10px}.profile-btn{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:#fff}.avatar{width:31px;height:31px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;font-size:11px;font-weight:900}.app-content{padding:24px;max-width:1500px;margin:auto}.app-section{display:none}.app-section.active{display:block}.welcome-row,.section-actions-row{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:20px}.welcome-row h2,.section-actions-row h2{font-size:34px;letter-spacing:-.03em;margin:5px 0}.welcome-row p,.section-actions-row p{color:var(--muted);margin:0}.dashboard-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.flight-card,.destination-card,.panel,.tool-card,.smart-card,.detail-hero,.loyalty-summary,.money-summary{border-radius:var(--radius);border:1px solid rgba(255,255,255,.07);background:linear-gradient(180deg,#112941,#0e1e31);box-shadow:0 16px 38px rgba(0,0,0,.13)}.flight-card{padding:22px;background:linear-gradient(145deg,#123758,#0f2d49)}.flight-card-head,.detail-flight-head,.panel-head,.modal-head,.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.flight-card-head small{color:#a8c7dd}.flight-card-head h3{margin:5px 0 0;font-size:28px}.route-big{display:grid;grid-template-columns:1fr 1.1fr 1fr;align-items:center;gap:18px;margin:26px 0}.route-big>div:first-child,.route-big>div:last-child{display:grid}.route-big .right{text-align:right}.route-big b{font-size:40px;line-height:1}.route-big span{color:#b8ccdd;font-size:13px}.route-big strong{font-size:22px;margin-top:10px}.route-big small{color:#93a7ba}.route-line{display:flex!important;align-items:center;gap:8px}.route-line span{height:1px;background:#5b7791;flex:1}.route-line b{font-size:20px;color:var(--cyan)}.flight-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:14px}.flight-meta>div{padding:11px;border-radius:13px;background:rgba(255,255,255,.05)}.flight-meta small{display:block;color:#91a6bb;font-size:10px}.flight-meta b{display:block;margin-top:3px}.destination-card{min-height:330px;overflow:hidden;background:radial-gradient(circle at 65% 22%,rgba(97,221,230,.20),transparent 28%),linear-gradient(145deg,#13456b,#0d273e)}.destination-overlay{height:100%;padding:24px;background:linear-gradient(180deg,rgba(4,14,24,.02),rgba(4,14,24,.58));display:flex;flex-direction:column}.destination-overlay h3{font-size:36px;margin:8px 0}.weather-line{display:flex;justify-content:space-between;align-items:flex-end;margin-top:auto}.weather-line>div{display:grid}.weather-line b{font-size:30px}.weather-line span{color:#d1e3ef}.destination-quick{display:grid;gap:7px;margin:18px 0}.destination-quick span{padding:9px 10px;border-radius:11px;background:rgba(255,255,255,.09);font-size:12px}.light-btn{background:white;color:#0c2237}.content-heading{display:flex;justify-content:space-between;margin:24px 0 12px}.content-heading h3{margin:0}.content-heading p{color:var(--muted);margin:3px 0}.smart-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.smart-card{display:grid;grid-template-columns:44px 1fr;gap:13px;padding:18px}.smart-card.warning-card{border-color:rgba(255,201,101,.18)}.smart-icon{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:rgba(77,159,255,.13);color:var(--cyan)}.smart-card small{font-size:10px;color:#8ea4b7}.smart-card h4{margin:4px 0 6px}.smart-card p{color:var(--muted);font-size:13px;line-height:1.45}.link-btn{padding:0;border:0;background:transparent;color:#75b4ff;font-weight:800}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.panel{padding:20px}.panel h3{margin-top:0}.panel p{color:var(--muted);line-height:1.5}.timeline{display:grid;gap:0;margin-top:12px}.timeline-item{display:grid;grid-template-columns:58px 14px 1fr;gap:10px;min-height:62px}.timeline-item .time{font-weight:850;color:#c7d9e8;font-size:12px}.timeline-dot{width:10px;height:10px;border-radius:50%;background:var(--blue);margin-top:4px;position:relative}.timeline-dot:after{content:"";position:absolute;left:4px;top:10px;width:2px;height:52px;background:#28445e}.timeline-item:last-child .timeline-dot:after{display:none}.timeline-item b{display:block}.timeline-item small{display:block;color:var(--muted);margin-top:4px}.loyalty-list{display:grid;gap:10px}.loyalty-row{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;padding:11px;border-radius:13px;background:rgba(255,255,255,.04)}.program-logo,.activity-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);font-size:10px;font-weight:900}.loyalty-row small{display:block;color:var(--muted)}.loyalty-row strong{font-size:16px}
+/* Trips */
+.trip-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.trip-card{padding:20px;border-radius:20px;background:linear-gradient(180deg,#112941,#0d1d30);border:1px solid rgba(255,255,255,.07)}.trip-card .trip-top{display:flex;justify-content:space-between}.trip-card h3{font-size:24px;margin:12px 0 6px}.trip-card p{color:var(--muted)}.trip-card .trip-route{font-weight:850;font-size:18px}.trip-card .trip-date{color:var(--muted);font-size:12px}
+/* Details */
+.back-btn{border:0;background:transparent;color:#8fc0ff;padding:0 0 14px}.detail-hero{padding:26px;background:linear-gradient(145deg,#123858,#102c47)}.detail-flight-head h2{font-size:36px;margin:6px 0}.detail-flight-head p{color:var(--muted)}.route-big.expanded{margin-bottom:0}.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}.detail-list{display:grid}.detail-list>div{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}.detail-list span{color:var(--muted)}.green-text{color:var(--green)!important}.notice{padding:13px 14px;border-radius:14px;margin:10px 0}.notice p{margin-bottom:0}.notice.amber{background:rgba(255,201,101,.09);border:1px solid rgba(255,201,101,.18)}.notice.green{background:rgba(81,212,155,.09);border:1px solid rgba(81,212,155,.18)}.checklist{display:grid;gap:10px}.checklist label{display:flex;align-items:center;gap:9px;padding:10px;border-radius:11px;background:rgba(255,255,255,.04)}
+/* Destination */
+.destination-hero{display:flex;justify-content:space-between;align-items:end;padding:28px;border-radius:25px;background:radial-gradient(circle at 75% 10%,rgba(97,221,230,.23),transparent 30%),linear-gradient(145deg,#12496f,#102a43);min-height:240px}.destination-hero h2{font-size:52px;margin:8px 0}.destination-hero p{color:#c5d9e8}.destination-stat{display:grid;text-align:right}.destination-stat small{color:#b8d5e7}.destination-stat b{font-size:32px}.destination-stat span{color:#c7ddeb}.tab-row{display:flex;gap:8px;margin:18px 0;overflow:auto}.tab-row button{padding:9px 13px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted)}.tab-row button.active{background:rgba(77,159,255,.14);color:#fff;border-color:rgba(77,159,255,.32)}.dest-tab{display:none}.dest-tab.active{display:block}.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.tool-card{padding:18px;display:grid;grid-template-columns:45px 1fr auto;gap:12px;align-items:start}.tool-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:rgba(77,159,255,.13)}.tool-card small{color:var(--muted);font-size:10px}.tool-card h3{margin:4px 0}.tool-card p{color:var(--muted);font-size:13px}.esim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.esim-plan{padding:20px;border-radius:20px;background:linear-gradient(180deg,#112941,#0f2034);border:1px solid rgba(255,255,255,.07)}.esim-plan.featured{outline:2px solid var(--blue)}.esim-plan h3{margin:8px 0}.esim-plan ul{padding-left:18px;color:var(--muted);line-height:1.8}.converter{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end}.converter label{display:grid;gap:7px;color:var(--muted);font-size:12px}.converter input{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:#091626;color:#fff}.swap{padding-bottom:12px}.muted-text{color:var(--muted);font-size:12px}.plain-list{color:var(--muted);line-height:1.8}.transport-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.transport-option>div:nth-child(2){display:flex;justify-content:space-between;margin:18px 0}.transport-option small{color:var(--cyan)}
+/* Loyalty */
+.loyalty-summary,.money-summary{display:grid;grid-template-columns:repeat(3,1fr);padding:18px;margin-bottom:16px}.loyalty-summary>div,.money-summary>div{padding:8px 18px;border-right:1px solid var(--line)}.loyalty-summary>div:last-child,.money-summary>div:last-child{border-right:0}.loyalty-summary small,.money-summary small{display:block;color:var(--muted);font-size:10px}.loyalty-summary b,.money-summary b{display:block;font-size:28px;margin:5px 0}.loyalty-summary span,.money-summary span{color:var(--muted);font-size:12px}.loyalty-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.loyalty-big{min-height:190px;padding:20px;border-radius:20px;display:flex;flex-direction:column;justify-content:space-between}.loyalty-big.red{background:linear-gradient(145deg,#7a2330,#c94756)}.loyalty-big.navy{background:linear-gradient(145deg,#17304e,#2d578a)}.loyalty-big.teal{background:linear-gradient(145deg,#0c6559,#159985)}.loyalty-big small{font-size:10px}.loyalty-big h3{font-size:22px;margin:6px 0}.loyalty-big p{color:#e3f1fa;margin:0}.loyalty-big>div:last-child{display:flex;align-items:end;gap:7px}.loyalty-big b{font-size:33px}.activity-list{display:grid}.activity-list>div{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}.activity-list small{display:block;color:var(--muted)}
+/* Money */
+.expense-list{display:grid}.expense-row{display:grid;grid-template-columns:42px 1fr auto;gap:11px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.expense-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(77,159,255,.12)}.expense-row small{display:block;color:var(--muted)}.refund-card{padding:16px;border-radius:18px;background:rgba(255,255,255,.035)}.refund-amount{font-size:34px;font-weight:900;margin:14px 0}.progress{height:8px;border-radius:999px;background:#0b1726;overflow:hidden;margin:15px 0}.progress span{display:block;width:65%;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+/* AI */
+.assistant-layout{display:grid;grid-template-columns:310px 1fr;gap:16px;height:calc(100vh - 122px)}.assistant-side,.chat-panel{border:1px solid rgba(255,255,255,.07);border-radius:22px;background:linear-gradient(180deg,#112941,#0e1e31)}.assistant-side{padding:20px;display:flex;flex-direction:column;justify-content:space-between}.assistant-side h2{font-size:30px;margin:5px 0}.assistant-side p{color:var(--muted)}.suggestion-list{display:grid;gap:8px}.suggestion{padding:11px;border-radius:12px;text-align:left;background:rgba(255,255,255,.04);color:#cfe0ed;border:1px solid var(--line)}.chat-panel{display:flex;flex-direction:column;min-width:0}.chat-head{display:flex;align-items:center;justify-content:space-between;padding:17px;border-bottom:1px solid var(--line)}.chat-head span{display:block;color:var(--muted);font-size:11px}.chat-messages{flex:1;overflow:auto;padding:20px;display:flex;flex-direction:column;gap:12px}.chat-msg{max-width:76%;padding:13px 15px;border-radius:17px;line-height:1.5}.chat-msg.ai{align-self:flex-start;background:rgba(255,255,255,.055)}.chat-msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--blue),var(--blue2))}.chat-compose{display:grid;grid-template-columns:1fr auto;gap:9px;padding:14px;border-top:1px solid var(--line)}.chat-compose input{padding:13px 14px;border-radius:13px;border:1px solid var(--line);background:#091626;color:#fff}
+/* Notifications */
+.notification-list{display:grid;gap:10px}.notification{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:start;padding:16px;border-radius:16px;background:#0f2135;border:1px solid rgba(255,255,255,.06)}.notification.unread{border-color:rgba(77,159,255,.28);background:#112841}.notification-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(77,159,255,.13)}.notification small{display:block;color:var(--muted);margin-top:4px}.notification time{font-size:11px;color:var(--muted)}
+/* Settings */
+.settings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.form-grid label{display:grid;gap:6px;color:var(--muted);font-size:12px}.form-grid input,.form-grid select{padding:11px;border-radius:11px;border:1px solid var(--line);background:#091626;color:white}.connection-list{display:grid}.connection-list>div{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}.connection-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(77,159,255,.13);font-size:11px;font-weight:900}.connection-list small{display:block;color:var(--muted)}.toggle-list{display:grid}.toggle-list label{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)}
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.65);display:grid;place-items:center;padding:20px}.modal{width:min(600px,100%);max-height:88vh;overflow:auto;padding:20px;border-radius:22px;background:#0d1d30;border:1px solid var(--line);box-shadow:var(--shadow)}.modal-head h3{margin:0}.close-btn{border:0;background:transparent;color:white;font-size:26px}.modal label{display:grid;gap:6px;margin:10px 0;color:var(--muted);font-size:12px}.modal input,.modal select{padding:12px;border-radius:11px;border:1px solid var(--line);background:#091626;color:white}.toast{position:fixed;right:18px;bottom:18px;z-index:200;display:none;padding:12px 15px;border-radius:13px;background:#16304c;color:white;border:1px solid #2d4c68;box-shadow:var(--shadow)}
+/* responsive */
+@media(max-width:1100px){.public-nav{display:none}.hero{grid-template-columns:1fr}.hero-product{min-height:650px}.feature-grid{grid-template-columns:repeat(2,1fr)}.split-showcase,.airline-section{grid-template-columns:1fr}.dashboard-grid,.two-col,.detail-grid{grid-template-columns:1fr}.smart-grid{grid-template-columns:1fr}.trip-cards,.loyalty-cards,.esim-grid,.transport-grid{grid-template-columns:repeat(2,1fr)}.assistant-layout{grid-template-columns:240px 1fr}}
+@media(max-width:820px){.site-header{padding:0 16px}.header-actions .ghost{display:none}.hero,.section-wrap{padding-left:18px;padding-right:18px}.feature-grid,.pricing-grid,.trip-cards,.loyalty-cards,.esim-grid,.transport-grid,.tool-grid,.settings-grid{grid-template-columns:1fr}.app-view{grid-template-columns:1fr}.app-sidebar{position:fixed;left:10px;right:10px;bottom:10px;top:auto;height:auto;z-index:60;border:1px solid var(--line);border-radius:18px;padding:8px;overflow:auto}.app-brand,.sidebar-plan{display:none}.app-nav{display:flex;min-width:max-content;gap:5px}.app-nav button{width:auto;display:grid;justify-items:center;font-size:10px;padding:8px 10px}.app-nav button span{font-size:16px}.app-main{padding-bottom:84px}.app-topbar{padding:0 14px}.app-content{padding:14px}.profile-btn span:nth-child(2){display:none}.welcome-row,.section-actions-row{align-items:flex-start}.route-big{gap:8px}.route-big b{font-size:32px}.flight-meta{grid-template-columns:repeat(2,1fr)}.assistant-layout{display:block;height:auto}.assistant-side{margin-bottom:12px}.chat-panel{height:650px}.loyalty-summary,.money-summary{grid-template-columns:1fr}.loyalty-summary>div,.money-summary>div{border-right:0;border-bottom:1px solid var(--line)}.loyalty-summary>div:last-child,.money-summary>div:last-child{border-bottom:0}.form-grid{grid-template-columns:1fr}.destination-hero{display:block}.destination-stat{text-align:left;margin-top:30px}.float-card{display:none}}
+@media(max-width:540px){.hero{padding-top:50px}.hero-copy h1{font-size:48px}.phone-shell{width:290px;height:570px}.hero-product{min-height:590px}.proof-row{font-size:12px}.footer{display:grid;gap:10px}.app-actions .ghost{display:none}.welcome-row,.section-actions-row{display:grid}.route-big{grid-template-columns:1fr auto 1fr}.route-line span{display:none}.destination-overlay h3{font-size:30px}.tool-card{grid-template-columns:40px 1fr}.tool-card>button{grid-column:2}.converter{grid-template-columns:1fr}.swap{display:none}.chat-msg{max-width:90%}}
+.detail-action-row{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin:0 0 12px}.onboarding-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.onboarding-grid label{margin:0}.modal-note{padding:12px 13px;border-radius:13px;background:rgba(77,159,255,.09);border:1px solid rgba(77,159,255,.17);color:#bcd2e5;font-size:13px;line-height:1.5}.success-card{padding:16px;border-radius:16px;background:rgba(81,212,155,.09);border:1px solid rgba(81,212,155,.2)}.purchase-tag{display:inline-flex;padding:5px 8px;border-radius:999px;background:rgba(81,212,155,.12);color:var(--green);font-size:10px;font-weight:850}.flight-pulse{animation:pulseBadge .7s ease}@keyframes pulseBadge{0%{transform:scale(1)}50%{transform:scale(1.07)}100%{transform:scale(1)}}.notification{cursor:pointer}.notification:hover{transform:translateY(-1px);border-color:rgba(77,159,255,.26)}.connection-list button.connected{color:var(--green);border-color:rgba(81,212,155,.28)}.demo-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:rgba(97,221,230,.08);border:1px solid rgba(97,221,230,.18);color:#bff5f8;font-size:11px}.billing-current{outline:2px solid var(--blue)!important}.disabledish{opacity:.55}
+@media(max-width:820px){.detail-action-row{justify-content:flex-start}.onboarding-grid{grid-template-columns:1fr}#shareDemoBtn{display:none}}
+
+/* === Investor V1 additions === */
+.feature-hidden{display:none!important}.coming-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border-radius:999px;background:rgba(255,201,101,.12);border:1px solid rgba(255,201,101,.2);color:#ffd786;font-size:10px;font-weight:850;letter-spacing:.05em}.map-shell{position:relative;overflow:hidden;min-height:520px;border-radius:24px;background:radial-gradient(circle at 72% 18%,rgba(35,195,255,.17),transparent 24%),radial-gradient(circle at 20% 75%,rgba(77,159,255,.15),transparent 28%),linear-gradient(180deg,#0a1b2c,#07131f);border:1px solid rgba(255,255,255,.07);box-shadow:0 22px 55px rgba(0,0,0,.22)}.map-grid{position:absolute;inset:0;opacity:.24;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 95%)}.map-land{position:absolute;filter:blur(.2px);background:rgba(69,121,143,.18);border:1px solid rgba(126,205,224,.08);border-radius:48% 52% 46% 54%/48% 42% 58% 52%;box-shadow:inset 0 0 40px rgba(92,217,233,.04)}.map-land.asia{width:34%;height:28%;left:46%;top:15%;transform:rotate(-10deg)}.map-land.aus{width:20%;height:20%;left:63%;top:64%;transform:rotate(9deg)}.map-land.india{width:10%;height:18%;left:43%;top:42%;transform:rotate(-8deg)}.map-land.africa{width:18%;height:30%;left:22%;top:44%;transform:rotate(5deg)}.map-land.japan{width:5%;height:12%;left:76%;top:24%;transform:rotate(18deg)}.map-route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.map-route path.route-base{stroke:rgba(110,190,255,.24);stroke-width:1.7;fill:none;stroke-dasharray:7 8}.map-route path.route-progress{stroke:url(#routeGradient);stroke-width:3.4;fill:none;stroke-linecap:round;filter:drop-shadow(0 0 7px rgba(97,221,230,.65))}.map-airport{position:absolute;transform:translate(-50%,-50%);display:grid;gap:3px}.map-airport b{font-size:13px}.map-airport small{font-size:10px;color:#9bb4c8}.map-airport.hkg{left:68%;top:29%}.map-airport.syd{left:74%;top:79%}.live-plane{position:absolute;left:68%;top:29%;transform:translate(-50%,-50%) rotate(155deg);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(55,178,255,.17);border:1px solid rgba(94,221,239,.45);box-shadow:0 0 0 8px rgba(77,159,255,.05),0 0 30px rgba(68,186,255,.38);font-size:20px;transition:left 1s linear,top 1s linear;z-index:5}.plane-pulse{position:absolute;inset:-12px;border:1px solid rgba(92,211,233,.35);border-radius:50%;animation:planePulse 1.9s ease-out infinite}@keyframes planePulse{0%{transform:scale(.7);opacity:.85}100%{transform:scale(1.7);opacity:0}}.near-plane{position:absolute;font-size:14px;color:#7798b2;opacity:.72;animation:drift 9s ease-in-out infinite alternate}.near-plane.p1{left:55%;top:42%}.near-plane.p2{left:82%;top:46%;animation-delay:-3s}.near-plane.p3{left:40%;top:66%;animation-delay:-6s}.near-plane.p4{left:65%;top:57%;animation-delay:-1s}@keyframes drift{from{transform:translate(-8px,4px) rotate(130deg)}to{transform:translate(14px,-8px) rotate(145deg)}}.map-overlay-card{position:absolute;left:18px;top:18px;z-index:8;padding:14px 16px;border-radius:16px;background:rgba(8,20,34,.78);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(14px);max-width:260px}.map-overlay-card h3{margin:3px 0 4px;font-size:20px}.map-overlay-card p{margin:0;color:#9db2c3;font-size:12px}.map-controls{position:absolute;right:18px;top:18px;z-index:8;display:flex;gap:8px}.map-telemetry{position:absolute;left:18px;right:18px;bottom:18px;z-index:8;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.map-telemetry>div{padding:11px 12px;border-radius:13px;background:rgba(7,18,31,.76);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(10px)}.map-telemetry small{display:block;color:#8ba4b9;font-size:9px;letter-spacing:.04em}.map-telemetry b{display:block;margin-top:3px;font-size:14px}.module-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.module-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px;border-radius:15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.05)}.module-row b{display:block}.module-row small{display:block;color:var(--muted);margin-top:3px}.switch{position:relative;width:46px;height:26px;flex:0 0 auto}.switch input{opacity:0;width:0;height:0}.switch span{position:absolute;inset:0;border-radius:999px;background:#253b50;cursor:pointer;transition:.2s}.switch span:after{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.2s}.switch input:checked+span{background:linear-gradient(135deg,var(--blue),var(--cyan))}.switch input:checked+span:after{transform:translateX(20px)}.preset-row{display:flex;gap:9px;flex-wrap:wrap}.identity-card{position:relative;overflow:hidden;min-height:230px;padding:22px;border-radius:22px;background:radial-gradient(circle at 86% 14%,rgba(97,221,230,.2),transparent 28%),linear-gradient(145deg,#143955,#0c2337);border:1px solid rgba(255,255,255,.08)}.identity-card:after{content:"W";position:absolute;right:20px;bottom:-25px;font-size:150px;font-weight:950;color:rgba(255,255,255,.025)}.identity-card.locked .identity-sensitive{filter:blur(7px);user-select:none}.identity-card .id-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}.identity-field small{display:block;color:#8ea8bb;font-size:9px}.identity-field b{display:block;margin-top:4px}.security-strip{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:rgba(74,208,152,.08);border:1px solid rgba(74,208,152,.13);margin-top:14px;color:#bcebd6;font-size:12px}.autofill-preview{display:grid;grid-template-columns:1fr 1fr;gap:10px}.autofill-preview label{font-size:11px;color:#91a7b9}.autofill-preview input,.autofill-preview select{margin-top:5px}.saily-card{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center;padding:20px;border-radius:20px;background:linear-gradient(145deg,rgba(77,159,255,.11),rgba(97,221,230,.07));border:1px solid rgba(97,221,230,.14);margin:18px 0}.saily-card h3{margin:5px 0}.saily-price{font-size:30px;font-weight:900;text-align:right}.saily-price small{display:block;font-size:11px;font-weight:500;color:var(--muted)}.checkout-summary{padding:13px;border-radius:14px;background:rgba(255,255,255,.04);margin:10px 0 14px}.checkout-summary .row{padding:5px 0}.card-row{display:grid;grid-template-columns:1fr 120px 100px;gap:9px}.test-badge{padding:7px 9px;border-radius:10px;background:rgba(255,201,101,.1);color:#ffd786;font-size:10px;font-weight:800}.feature-preview-card{position:relative}.feature-preview-card[data-feature]{}.app-nav button[data-feature].feature-hidden{display:none!important}.mini-live-map{position:relative;height:130px;border-radius:16px;overflow:hidden;background:linear-gradient(145deg,#0b2338,#0b1827);border:1px solid rgba(255,255,255,.06)}.mini-live-map:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:24px 24px}.mini-route{position:absolute;left:12%;right:10%;top:58%;height:1px;background:linear-gradient(90deg,transparent,#42bcff,#64e4dc,transparent);transform:rotate(8deg)}.mini-plane{position:absolute;left:58%;top:50%;font-size:22px;animation:miniFly 4s ease-in-out infinite alternate}@keyframes miniFly{from{transform:translate(-16px,8px) rotate(125deg)}to{transform:translate(18px,-6px) rotate(135deg)}}.status-dot{width:7px;height:7px;border-radius:50%;background:#52d698;display:inline-block;box-shadow:0 0 0 4px rgba(82,214,152,.08);margin-right:5px}.roadmap-card{padding:18px;border-radius:18px;border:1px dashed rgba(255,255,255,.12);background:rgba(255,255,255,.025)}
+@media(max-width:820px){.map-shell{min-height:610px}.map-telemetry{grid-template-columns:repeat(2,1fr)}.map-telemetry>div:last-child{grid-column:span 2}.map-overlay-card{max-width:210px}.map-controls{top:104px;right:14px}.module-grid,.autofill-preview,.saily-card{grid-template-columns:1fr}.saily-price{text-align:left}.card-row{grid-template-columns:1fr}.identity-card .id-grid{grid-template-columns:1fr 1fr}}
+
+</style>
+</head>
+<body>
+  <div id="toast" class="toast"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#" data-link="landing" aria-label="Waypoint home">
+      <span class="brand-mark">W</span>
+      <span>Waypoint</span>
+    </a>
+    <nav class="public-nav" id="publicNav">
+      <button data-scroll="features">Features</button>
+      <button data-scroll="how">How it works</button>
+      <button data-scroll="pricing">Pricing</button>
+      <button data-scroll="airlines">For airlines</button>
+    </nav>
+    <div class="header-actions">
+      <button class="ghost" id="demoButton">View demo</button>
+      <button class="primary" id="headerCta">Get started</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- PUBLIC LANDING -->
+    <section id="landingView" class="public-view">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="kicker">AI travel companion</div>
+          <h1>Your entire travel life, <span>in one place.</span></h1>
+          <p>Waypoint organizes bookings, tracks flights, watches travel spend and refunds, monitors loyalty balances, recommends eSIMs, and gives you a destination-aware AI assistant.</p>
+          <div class="hero-actions">
+            <button class="primary large" id="heroStart">Start with demo</button>
+            <button class="ghost large" id="heroTour">Explore the product</button>
+          </div>
+          <div class="proof-row">
+            <span>✓ Trips</span><span>✓ Flight tracking</span><span>✓ Loyalty</span><span>✓ Travel money</span>
+          </div>
+        </div>
+        <div class="hero-product">
+          <div class="phone-shell phone-main">
+            <div class="phone-top">9:41 <span>•••</span></div>
+            <div class="mini-app">
+              <div class="mini-head"><b>Good evening, Alex</b><span>◉</span></div>
+              <div class="mini-sub">Next stop: Sydney</div>
+              <div class="mini-flight">
+                <div class="mini-flight-head"><span>QF128</span><span class="badge ok">On time</span></div>
+                <div class="mini-route"><div><b>HKG</b><small>19:30</small></div><span>→</span><div><b>SYD</b><small>07:45</small></div></div>
+                <div class="mini-meta"><span>T1</span><span>Gate 23</span><span>40D</span></div>
+              </div>
+              <div class="mini-alert">
+                <b>Refund detected</b>
+                <small>Your paid extra-legroom seat was removed after a flight change.</small>
+              </div>
+              <div class="mini-grid">
+                <div><span>✈</span><b>Flight</b><small>On time</small></div>
+                <div><span>⌂</span><b>Hotel</b><small>Check-in 3pm</small></div>
+              </div>
+            </div>
+          </div>
+          <div class="float-card float-left">
+            <span class="icon-circle">◎</span>
+            <div><small>LOYALTY WALLET</small><b>560,770 pts</b></div>
+          </div>
+          <div class="float-card float-right">
+            <span class="icon-circle">⌁</span>
+            <div><small>HONG KONG eSIM</small><b>10GB · US$12.99</b></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-wrap" id="features">
+        <div class="section-heading">
+          <div class="kicker">One travel operating system</div>
+          <h2>Everything useful after you book.</h2>
+          <p>Not just an itinerary. Waypoint helps you understand what changed, what it costs, what to do next, and how to get more from your trip.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card"><div class="feature-icon">✈</div><h3>Live flight tracking</h3><p>Flights, gates, terminals, delays, aircraft and disruption alerts in one timeline.</p></article>
+          <article class="feature-card"><div class="feature-icon">✦</div><h3>AI concierge</h3><p>Ask questions using your actual trip context instead of starting from scratch every time.</p></article>
+          <article class="feature-card"><div class="feature-icon">◇</div><h3>Loyalty wallet</h3><p>Track airline, hotel and card rewards, status tiers and recent earning activity.</p></article>
+          <article class="feature-card"><div class="feature-icon">↺</div><h3>Refund intelligence</h3><p>Spot seat, fare and travel-service refunds and follow up when money doesn't arrive.</p></article>
+          <article class="feature-card"><div class="feature-icon">⌁</div><h3>eSIM marketplace</h3><p>Compare data plans for your destination and activate connectivity before arrival.</p></article>
+          <article class="feature-card"><div class="feature-icon">$</div><h3>Travel money</h3><p>Currency conversion, trip spend, fee awareness and destination payment guidance.</p></article>
+        </div>
+      </section>
+
+      <section class="section-wrap split-showcase" id="how">
+        <div>
+          <div class="kicker">How it works</div>
+          <h2>From booking email to useful action.</h2>
+          <div class="steps">
+            <div class="step"><span>1</span><div><b>Connect your travel sources</b><p>In production: Gmail, airline accounts, hotel programs and cards.</p></div></div>
+            <div class="step"><span>2</span><div><b>Waypoint builds your trip</b><p>Flights, hotels, bookings, loyalty and payments become a clean timeline.</p></div></div>
+            <div class="step"><span>3</span><div><b>AI watches what changes</b><p>Delay, seat loss, refund email, gate change or new booking — surfaced as an action.</p></div></div>
+            <div class="step"><span>4</span><div><b>You get one clear answer</b><p>No digging through airline apps, emails and loyalty portals.</p></div></div>
+          </div>
+        </div>
+        <div class="insight-demo">
+          <div class="insight-title">Trip intelligence</div>
+          <div class="insight-row"><span class="signal warn">!</span><div><b>Extra-legroom seat removed</b><small>Previous seat purchase: ~A$100</small></div></div>
+          <div class="insight-row"><span class="signal info">i</span><div><b>Flight changed by 1 day</b><small>Change payment detected: A$150</small></div></div>
+          <div class="insight-row"><span class="signal good">✓</span><div><b>Refund email detected</b><small>Expected separate transaction to original payment method</small></div></div>
+          <button class="primary full" id="insightDemoBtn">Open this trip in demo</button>
+        </div>
+      </section>
+
+      <section class="section-wrap" id="pricing">
+        <div class="section-heading compact">
+          <div class="kicker">Simple pricing</div>
+          <h2>Mass-market by design.</h2>
+        </div>
+        <div class="pricing-grid">
+          <article class="price-card"><div class="price-name">Free</div><div class="price">$0</div><p>Try the core organizer.</p><ul><li>Trip dashboard</li><li>Basic flight status</li><li>1 destination pack per trip</li></ul><button class="ghost full plan-btn" data-plan="Free">Choose Free</button></article>
+          <article class="price-card featured"><div class="popular">MOST POPULAR</div><div class="price-name">Monthly</div><div class="price">$4.99 <small>/ month</small></div><p>All the smart features.</p><ul><li>AI concierge</li><li>Refund tracking</li><li>eSIM and money tools</li><li>Loyalty dashboard</li></ul><button class="primary full plan-btn" data-plan="Monthly">Choose Monthly</button></article>
+          <article class="price-card"><div class="price-name">Annual</div><div class="price">$19.99 <small>/ year</small></div><p>Best value for regular travelers.</p><ul><li>Everything in Monthly</li><li>Unlimited trips</li><li>Priority notifications</li><li>Points optimization</li></ul><button class="ghost full plan-btn" data-plan="Annual">Choose Annual</button></article>
+        </div>
+      </section>
+
+      <section class="section-wrap airline-section" id="airlines">
+        <div>
+          <div class="kicker">For airlines & travel brands</div>
+          <h2>Put the intelligence inside your own customer journey.</h2>
+          <p>Waypoint can become a white-label layer for disruption summaries, loyalty assistance, destination services, ancillary offers and conversational support.</p>
+          <button class="primary" id="partnerBtn">Request partner demo</button>
+        </div>
+        <div class="airline-card">
+          <div class="airline-brand"><span class="brand-mark small-mark">W</span> Your Airline</div>
+          <div class="airline-msg"><small>TRAVEL UPDATE</small><b>Your flight is delayed by 52 minutes.</b><p>Your connection is still safe. Lounge access remains valid. Boarding is now expected at 20:41.</p></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="brand"><span class="brand-mark">W</span><span>Waypoint</span></div>
+        <p>Concept prototype — demo data only.</p>
+      </footer>
+    </section>
+
+    <!-- APP -->
+    <section id="appView" class="app-view hidden">
+      <aside class="app-sidebar">
+        <a class="brand app-brand" href="#" id="appBrand"><span class="brand-mark">W</span><span>Waypoint</span></a>
+        <nav class="app-nav">
+          <button class="active" data-app="dashboard"><span>⌂</span>Home</button>
+          <button data-app="trips"><span>✈</span>Trips</button>
+          <button data-app="map" data-feature="map"><span>⌖</span>Live map</button>
+          <button data-app="explore" data-feature="explore"><span>◉</span>Explore</button>
+          <button data-app="money" data-feature="money"><span>$</span>Money</button>
+          <button data-app="assistant" data-feature="assistant"><span>✦</span>AI Concierge</button>
+          <button data-app="travelid" data-feature="travelid"><span>▣</span>Travel ID</button>
+          <button data-app="loyalty" data-feature="loyalty"><span>◇</span>Points</button>
+          <button data-app="notifications" data-feature="notifications"><span>•</span>Alerts</button>
+          <button data-app="customize"><span>◫</span>Customize</button>
+          <button data-app="settings"><span>⚙</span>Settings</button>
+        </nav>
+        <div class="sidebar-plan">
+          <small>CURRENT PLAN</small>
+          <b id="sidePlan">Waypoint Plus</b>
+          <button class="ghost small-btn" data-app="billing">Manage plan</button>
+        </div>
+      </aside>
+
+      <div class="app-main">
+        <header class="app-topbar">
+          <div>
+            <div class="app-page-title" id="appPageTitle">Home</div>
+            <div class="app-page-sub" id="appPageSub">Your travel command center</div>
+          </div>
+          <div class="app-actions">
+            <button class="ghost" id="shareDemoBtn">Share demo</button>
+            <button class="ghost icon-btn" data-app="notifications">🔔 <span id="notifCount">3</span></button>
+            <button class="profile-btn" id="profileButton"><span class="avatar">AH</span><span>Alex Hay</span>⌄</button>
+          </div>
+        </header>
+
+        <div class="app-content">
+          <!-- DASHBOARD -->
+          <section class="app-section active" id="dashboardSection">
+            <div class="welcome-row">
+              <div><div class="kicker">WAYPOINT V1 · INVESTOR DEMO</div><h2>Your trip, under control.</h2><p>One place for flights, money, destination tools and AI.</p></div>
+              <button class="primary" id="addTripBtn">+ Add trip</button>
+            </div>
+
+            <div class="dashboard-grid">
+              <article class="flight-card">
+                <div class="flight-card-head"><div><small>UPCOMING FLIGHT</small><h3>QF128</h3></div><span class="badge ok">ON TIME</span></div>
+                <div class="route-big">
+                  <div><b>HKG</b><span>Hong Kong</span><strong>19:30</strong><small>Fri 9 Oct</small></div>
+                  <div class="route-line"><span></span><b>✈</b><span></span></div>
+                  <div class="right"><b>SYD</b><span>Sydney</span><strong>07:45</strong><small>Sat 10 Oct</small></div>
+                </div>
+                <div class="flight-meta"><div><small>Terminal</small><b>1</b></div><div><small>Gate</small><b>23</b></div><div><small>Seat</small><b>40D</b></div><div><small>Duration</small><b>9h 15m</b></div></div>
+                <button class="ghost full" id="viewFlightBtn">View flight details</button>
+              </article>
+
+              <article class="destination-card">
+                <div class="destination-overlay">
+                  <div class="kicker light">Destination now</div>
+                  <h3>Hong Kong 🇭🇰</h3>
+                  <div class="weather-line"><div><b>28°C</b><span>Partly cloudy</span></div><div><small>LOCAL TIME</small><b>16:24</b></div></div>
+                  <div class="destination-quick"><span>10GB eSIM · US$12.99</span><span>1 HKD ≈ A$0.20</span></div>
+                  <button class="light-btn full" data-app="explore">Open destination pack</button>
+                </div>
+              </article>
+            </div>
+
+            <div class="content-heading"><div><h3>Smart actions</h3><p>Based on your current trip</p></div></div>
+            <div class="smart-grid">
+              <article class="smart-card warning-card" data-feature="money"><span class="smart-icon">↺</span><div><small>REFUND WATCH</small><h4>Extra-legroom refund</h4><p>Qantas says a paid-seat refund was processed. Expected ~A$100.</p><button class="link-btn" id="refundWatchBtn">Track refund →</button></div></article>
+              <article class="smart-card" data-feature="explore"><span class="smart-icon">⌁</span><div><small>CONNECTIVITY</small><h4>Hong Kong eSIM</h4><p>10GB / 30 days. Demo offer from US$12.99.</p><button class="link-btn" data-app="explore">Compare eSIMs →</button></div></article>
+              <article class="smart-card" data-feature="assistant"><span class="smart-icon">✦</span><div><small>AI CONCIERGE</small><h4>Ask about your trip</h4><p>Airport timing, refund status, destination and more.</p><button class="link-btn" data-app="assistant">Ask Waypoint →</button></div></article>
+              <article class="smart-card feature-preview-card" data-feature="map"><span class="smart-icon">⌖</span><div><small>LIVE FLIGHT MAP</small><h4>QF128 is tracking</h4><p><span class="status-dot"></span>Animated route, progress and flight telemetry.</p><button class="link-btn" data-app="map">Open live map →</button></div></article>
+            </div>
+
+            <div class="two-col">
+              <article class="panel">
+                <div class="panel-head"><div><h3>Trip timeline</h3><p>Hong Kong → Sydney</p></div><button class="link-btn" data-app="trips">View trip</button></div>
+                <div class="timeline">
+                  <div class="timeline-item"><div class="time">15:25</div><div class="timeline-dot"></div><div><b>Leave for HKG</b><small>Suggested departure from your current area</small></div></div>
+                  <div class="timeline-item"><div class="time">16:30</div><div class="timeline-dot"></div><div><b>Arrive at airport</b><small>3 hours before international departure</small></div></div>
+                  <div class="timeline-item"><div class="time">19:30</div><div class="timeline-dot"></div><div><b>QF128 departs</b><small>Hong Kong T1 · Gate 23 · Seat 40D</small></div></div>
+                  <div class="timeline-item"><div class="time">07:45</div><div class="timeline-dot"></div><div><b>Arrive Sydney</b><small>Saturday, 10 October</small></div></div>
+                </div>
+              </article>
+              <article class="panel" data-feature="map">
+                <div class="panel-head"><div><h3>Flight map</h3><p>Live-style tracking preview</p></div><button class="link-btn" data-app="map">Open map</button></div>
+                <div class="mini-live-map"><div class="mini-route"></div><div class="mini-plane">✈</div></div>
+                <div class="row" style="margin-top:12px"><span class="muted-text">QF128 · HKG → SYD</span><b><span class="status-dot"></span>Tracking</b></div>
+              </article>
+            </div>
+          </section>
+
+          <!-- TRIPS -->
+          <section class="app-section" id="tripsSection">
+            <div class="section-actions-row"><div><h2>Your trips</h2><p>Upcoming and past travel in one place.</p></div><button class="primary" id="addTripBtn2">+ Add trip</button></div>
+            <div id="tripCards" class="trip-cards"></div>
+          </section>
+
+          <!-- FLIGHT DETAIL -->
+          <section class="app-section" id="flightSection">
+            <button class="back-btn" data-app="dashboard">← Back</button>
+            <div class="detail-action-row"><button class="ghost" id="refreshFlightBtn">↻ Refresh status</button><button class="ghost" id="calendarBtn">+ Add to calendar</button><button class="ghost" id="downloadItineraryBtn">↓ Download itinerary</button></div>
+            <div class="detail-hero">
+              <div class="detail-flight-head"><div><div class="kicker">Qantas · QF128</div><h2>Hong Kong → Sydney</h2><p>Friday, 9 October 2026</p></div><span class="badge ok" id="flightStatusBadge">ON TIME</span></div>
+              <div class="route-big expanded">
+                <div><b>HKG</b><span>Hong Kong</span><strong>19:30</strong><small>Terminal 1 · Gate 23</small></div>
+                <div class="route-line"><span></span><b>✈</b><span></span></div>
+                <div class="right"><b>SYD</b><span>Sydney</span><strong>07:45</strong><small>Terminal 1</small></div>
+              </div>
+            </div>
+            <div class="detail-grid">
+              <article class="panel"><h3>Flight details</h3><div class="detail-list"><div><span>Aircraft</span><b>Airbus A330-300</b></div><div><span>Duration</span><b>9h 15m</b></div><div><span>Cabin</span><b>Economy (L)</b></div><div><span>Seat</span><b>40D</b></div><div><span>Status</span><b class="green-text" id="flightStatusText">On time</b></div></div></article>
+              <article class="panel"><h3>Seat intelligence</h3><div class="notice amber"><b>Extra-legroom seat no longer assigned</b><p>You previously paid roughly A$100 for an extra-legroom seat. Your current flight shows 40D.</p></div><div class="notice green"><b>Refund email detected</b><p>Qantas says eligible paid-seat refunds are processed separately to the original payment method.</p></div></article>
+              <article class="panel"><h3>Before you fly</h3><div class="checklist"><label><input type="checkbox" checked> Passport ready</label><label><input type="checkbox"> Check in online</label><label><input type="checkbox"> Save boarding pass</label><label><input type="checkbox"> Activate eSIM</label></div></article>
+              <article class="panel"><h3>Trip costs</h3><div class="detail-list"><div><span>Flight change</span><b>A$150.00</b></div><div><span>Extra-legroom seat</span><b>~A$100.00</b></div><div><span>Expected refund</span><b class="green-text">~A$100.00</b></div></div><button class="ghost full" data-app="money">Open money tracker</button></article>
+            </div>
+          </section>
+
+          <!-- LIVE MAP -->
+          <section class="app-section" id="mapSection">
+            <div class="section-actions-row"><div><h2>Live flight map</h2><p>QF128 · Hong Kong to Sydney · simulated V1 tracking feed.</p></div><div class="coming-pill"><span class="status-dot"></span> LIVE DEMO</div></div>
+            <div class="map-shell" id="flightMap">
+              <div class="map-grid"></div><div class="map-land asia"></div><div class="map-land india"></div><div class="map-land japan"></div><div class="map-land africa"></div><div class="map-land aus"></div>
+              <svg class="map-route" viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="routeGradient" x1="0" x2="1"><stop offset="0%" stop-color="#4d9fff"/><stop offset="100%" stop-color="#61dde6"/></linearGradient></defs><path class="route-base" d="M680 150 C720 220 760 330 740 410"/><path class="route-progress" id="routeProgressPath" pathLength="100" stroke-dasharray="100" stroke-dashoffset="66" d="M680 150 C720 220 760 330 740 410"/></svg>
+              <div class="map-airport hkg"><b>HKG</b><small>Hong Kong</small></div><div class="map-airport syd"><b>SYD</b><small>Sydney</small></div>
+              <div class="live-plane" id="livePlane"><span class="plane-pulse"></span>✈</div>
+              <span class="near-plane p1">✈</span><span class="near-plane p2">✈</span><span class="near-plane p3">✈</span><span class="near-plane p4">✈</span>
+              <div class="map-overlay-card"><small class="kicker">TRACKING NOW</small><h3>QF128</h3><p id="mapStatusText">Demo aircraft progressing south toward Sydney.</p></div>
+              <div class="map-controls"><button class="ghost" id="recenterMapBtn">Recenter</button><button class="ghost" id="toggleTrackingBtn">Pause</button></div>
+              <div class="map-telemetry"><div><small>ROUTE PROGRESS</small><b id="mapProgressLabel">34%</b></div><div><small>ALTITUDE</small><b id="mapAltitude">35,000 ft</b></div><div><small>GROUND SPEED</small><b id="mapSpeed">872 km/h</b></div><div><small>EST. ARRIVAL</small><b>07:45</b></div><div><small>DATA MODE</small><b>Simulated · V1</b></div></div>
+            </div>
+            <div class="two-col">
+              <article class="panel"><h3>What a live provider unlocks</h3><p>Production can replace this simulator with an aviation-data feed for aircraft position, altitude, speed, route progress and operational status while preserving this interface.</p><div class="detail-list"><div><span>Aircraft</span><b>Airbus A330-300</b></div><div><span>Registration</span><b>Demo data</b></div><div><span>Route</span><b>HKG → SYD</b></div></div></article>
+              <article class="panel"><h3>Nearby traffic</h3><p>The surrounding aircraft are intentionally simulated in V1. This lets investors experience the interaction before a commercial ADS-B / flight-data provider is connected.</p><button class="primary" id="mapAskAiBtn">Ask AI about this flight</button></article>
+            </div>
+          </section>
+
+          <!-- EXPLORE -->
+          <section class="app-section" id="exploreSection">
+            <div class="destination-hero">
+              <div><div class="kicker light">Destination pack</div><h2>Hong Kong</h2><p>Your useful arrival guide for this trip.</p></div>
+              <div class="destination-stat"><small>LOCAL TIME</small><b>16:24</b><span>28°C · Partly cloudy</span></div>
+            </div>
+            <div class="saily-card" data-feature="explore"><div><div class="kicker">CONNECTIVITY PARTNER</div><h3>Get online before you land with Saily</h3><p>Waypoint hands you off to Saily to choose and activate your eSIM. Your exact referral URL can replace the demo link before launch.</p><div class="row" style="justify-content:flex-start;margin-top:10px"><span class="badge ok">Recommended</span><span class="muted-text">Hong Kong · quick setup</span></div></div><div><div class="saily-price">Saily eSIM<small>Current plans open on Saily</small></div><button class="primary full" id="openSailyBtn" style="margin-top:12px">Open Saily ↗</button></div></div>
+            <div class="tab-row" id="destinationTabs">
+              <button class="active" data-dtab="overview">Overview</button><button data-dtab="esim">eSIM</button><button data-dtab="money">Money</button><button data-dtab="transport">Transport</button><button data-dtab="essentials">Essentials</button>
+            </div>
+            <div id="destOverview" class="dest-tab active">
+              <div class="tool-grid">
+                <article class="tool-card"><span class="tool-icon">⌁</span><div><small>RECOMMENDED eSIM</small><h3>10GB · 30 days</h3><p>Demo provider · instant activation</p><b>US$12.99</b></div><button class="ghost esim-buy">View</button></article>
+                <article class="tool-card"><span class="tool-icon">$</span><div><small>EXCHANGE RATE</small><h3>1 HKD ≈ A$0.20</h3><p>Demo rate for prototype purposes</p></div><button class="ghost" data-dtab-jump="money">Convert</button></article>
+                <article class="tool-card"><span class="tool-icon">🚆</span><div><small>AIRPORT TO CITY</small><h3>Airport Express</h3><p>~24 min to Central · HK$115</p></div><button class="ghost" data-dtab-jump="transport">Details</button></article>
+                <article class="tool-card"><span class="tool-icon">💳</span><div><small>LOCAL TIP</small><h3>Get an Octopus card</h3><p>Useful for MTR, buses and many shops.</p></div><button class="ghost" id="saveTipBtn">Save</button></article>
+              </div>
+              <div class="two-col">
+                <article class="panel"><h3>Arrival checklist</h3><div class="checklist"><label><input type="checkbox"> Activate eSIM</label><label><input type="checkbox"> Add hotel address offline</label><label><input type="checkbox"> Get Octopus card</label><label><input type="checkbox"> Check return flight</label></div></article>
+                <article class="panel"><h3>Quick guide</h3><div class="detail-list"><div><span>Emergency</span><b>999</b></div><div><span>Plug type</span><b>Type G</b></div><div><span>Primary language</span><b>Cantonese / English</b></div><div><span>Airport</span><b>HKG</b></div></div></article>
+              </div>
+            </div>
+            <div id="destEsim" class="dest-tab">
+              <div class="esim-grid" id="esimGrid"></div>
+            </div>
+            <div id="destMoney" class="dest-tab">
+              <div class="two-col">
+                <article class="panel">
+                  <h3>Currency converter</h3>
+                  <div class="converter">
+                    <label>HKD<input type="number" id="hkdInput" value="500" min="0"></label>
+                    <div class="swap">⇄</div>
+                    <label>AUD<input type="text" id="audOutput" value="100.00" readonly></label>
+                  </div>
+                  <p class="muted-text">Prototype uses a fixed demo rate of 1 HKD = A$0.20.</p>
+                </article>
+                <article class="panel"><h3>Payment tips</h3><ul class="plain-list"><li>Cards are widely accepted.</li><li>Octopus is useful for transit and small purchases.</li><li>If a terminal offers to charge you in AUD, compare the rate before accepting.</li><li>Keep a small amount of cash for edge cases.</li></ul></article>
+              </div>
+            </div>
+            <div id="destTransport" class="dest-tab">
+              <div class="transport-grid">
+                <article class="panel transport-option"><div><small>FASTEST</small><h3>Airport Express</h3><p>HKG → Hong Kong Station</p></div><div><b>24 min</b><span>HK$115</span></div><button class="ghost save-transport">Save to trip</button></article>
+                <article class="panel transport-option"><div><small>DOOR TO DOOR</small><h3>Taxi</h3><p>Airport → Central</p></div><div><b>~35 min</b><span>~HK$350</span></div><button class="ghost save-transport">Save to trip</button></article>
+                <article class="panel transport-option"><div><small>BUDGET</small><h3>Airport bus</h3><p>A11 to Central area</p></div><div><b>~50 min</b><span>~HK$41.90</span></div><button class="ghost save-transport">Save to trip</button></article>
+              </div>
+            </div>
+            <div id="destEssentials" class="dest-tab">
+              <div class="tool-grid">
+                <article class="tool-card"><span class="tool-icon">🔌</span><div><small>POWER</small><h3>Type G</h3><p>Same plug format as the UK.</p></div></article>
+                <article class="tool-card"><span class="tool-icon">🛂</span><div><small>ENTRY</small><h3>Check requirements</h3><p>Production version would tailor this to passport and destination.</p></div></article>
+                <article class="tool-card"><span class="tool-icon">🧳</span><div><small>PACKING</small><h3>Warm + humid</h3><p>Light clothing; carry rain protection.</p></div></article>
+                <article class="tool-card"><span class="tool-icon">☎</span><div><small>EMERGENCY</small><h3>999</h3><p>Police, fire and ambulance.</p></div></article>
+              </div>
+            </div>
+          </section>
+
+          <!-- LOYALTY -->
+          <section class="app-section" id="loyaltySection">
+            <div class="section-actions-row"><div><div class="coming-pill">COMING SOON</div><h2>Points & loyalty</h2><p>Connect airline, hotel and card rewards when the integration layer is ready.</p></div></div>
+            <div class="loyalty-summary"><div><small>PLANNED VIEW</small><b>One wallet</b><span>Airline + hotel + card points</span></div><div><small>PLANNED INTELLIGENCE</small><b>Best use</b><span>Cash vs points + transfer options</span></div><div><small>PLANNED ALERTS</small><b>Expiry</b><span>Protect value before points expire</span></div></div>
+            <div class="two-col"><article class="panel"><h3>What’s coming</h3><div class="detail-list"><div><span>Automatic balances</span><b>Planned</b></div><div><span>Status & expiry</span><b>Planned</b></div><div><span>Award optimisation</span><b>Planned</b></div><div><span>Transfer partner advice</span><b>Planned</b></div></div></article><article class="roadmap-card"><div class="kicker">V1 ROADMAP</div><h3>Kept intentionally out of the core demo</h3><p class="muted-text">Trips, flight intelligence, money/refunds, destination tools and AI are the V1 focus. Loyalty becomes powerful once secure account/email connections are available.</p></article></div>
+          </section>
+
+          <!-- MONEY -->
+          <section class="app-section" id="moneySection">
+            <div class="section-actions-row"><div><h2>Travel money</h2><p>Spend, refunds and trip-level costs.</p></div><button class="primary" id="addExpenseBtn">+ Add expense</button></div>
+            <div class="money-summary"><div><small>TRIP SPEND</small><b id="tripSpend">A$312.99</b><span>Hong Kong → Sydney</span></div><div><small>EXPECTED REFUNDS</small><b class="green-text">~A$100</b><span>1 tracked item</span></div><div><small>NET TRIP COST</small><b id="netTripCost">~A$212.99</b><span>After expected refund</span></div></div>
+            <div class="two-col">
+              <article class="panel"><div class="panel-head"><div><h3>Transactions</h3><p>Demo ledger</p></div></div><div id="expenseList" class="expense-list"></div></article>
+              <article class="panel"><h3>Refund watch</h3><div class="refund-card"><div class="row"><div><small>QANTAS PAID SEAT</small><h4>Extra-legroom seat</h4></div><span class="badge pending">PENDING</span></div><div class="refund-amount">~A$100</div><p>Airline email indicates the eligible paid-seat refund was processed separately.</p><div class="progress"><span></span></div><small>Watching for matching refund transaction</small><button class="ghost full" id="markRefundBtn">Mark as received</button></div></article>
+            </div>
+          </section>
+
+          <!-- ASSISTANT -->
+          <section class="app-section" id="assistantSection">
+            <div class="assistant-layout">
+              <aside class="assistant-side">
+                <div><div class="kicker">Waypoint AI</div><h2>Travel concierge</h2><p>Demo assistant with trip-aware scripted answers.</p></div>
+                <div class="suggestion-list">
+                  <button class="suggestion">What time should I leave for the airport?</button>
+                  <button class="suggestion">What happened to my extra-legroom seat?</button>
+                  <button class="suggestion">Which eSIM should I buy?</button>
+                  <button class="suggestion">Where is QF128 on the live map?</button>
+                </div>
+              </aside>
+              <div class="chat-panel">
+                <div class="chat-head"><div><b>Waypoint Concierge</b><span>Trip-aware demo</span></div><span class="badge ok">ONLINE</span></div>
+                <div id="chatMessages" class="chat-messages">
+                  <div class="chat-msg ai">I know your current demo trip: QF128 from Hong Kong to Sydney on 9 October, departing 19:30, seat 40D. I can help with airport timing, the paid-seat refund, eSIMs, the live map and destination basics.</div>
+                </div>
+                <div class="chat-compose"><input id="chatInput" placeholder="Ask anything about your trip…" /><button class="primary" id="chatSend">Send</button></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TRAVEL ID -->
+          <section class="app-section" id="travelidSection">
+            <div class="section-actions-row"><div><h2>Travel ID</h2><p>Secure identity vault concept for faster booking and check-in.</p></div><span class="coming-pill">SECURE DEMO</span></div>
+            <div class="two-col">
+              <article class="identity-card locked" id="identityCard"><div class="row"><div><div class="kicker">WAYPOINT ID</div><h3 style="margin:5px 0">Demo Passport</h3></div><span class="badge ok" id="idLockBadge">LOCKED</span></div><div class="id-grid identity-sensitive"><div class="identity-field"><small>LEGAL NAME</small><b>ALEX MORGAN</b></div><div class="identity-field"><small>NATIONALITY</small><b>AUSTRALIAN</b></div><div class="identity-field"><small>PASSPORT NO.</small><b>N1234567</b></div><div class="identity-field"><small>EXPIRY</small><b>14 JUN 2031</b></div><div class="identity-field"><small>DATE OF BIRTH</small><b>12 MAR 1998</b></div><div class="identity-field"><small>ISSUING COUNTRY</small><b>AUSTRALIA</b></div></div><div class="security-strip">🔒 Demo values only. Production design requires device authentication and encrypted storage.</div></article>
+              <article class="panel"><h3>Autofill booking sites</h3><p>Waypoint can eventually fill supported airline and travel forms only after you approve it. The V1 demonstration uses fake identity data.</p><button class="primary full" id="unlockTravelIdBtn">Unlock demo identity</button><button class="ghost full" id="openAutofillDemoBtn" style="margin-top:8px">Open autofill demo</button><div class="detail-list" style="margin-top:16px"><div><span>Release identity data</span><b>Face ID / Touch ID</b></div><div><span>AI model access</span><b>None by default</b></div><div><span>Real passport data</span><b>Not stored in V1</b></div></div></article>
+            </div>
+          </section>
+
+          <!-- CUSTOMIZE -->
+          <section class="app-section" id="customizeSection">
+            <div class="section-actions-row"><div><h2>Make Waypoint yours</h2><p>Hide entire parts of the app you don’t need. Your navigation updates instantly.</p></div></div>
+            <article class="panel"><div class="panel-head"><div><h3>Interface presets</h3><p>Start simple or show everything.</p></div></div><div class="preset-row"><button class="primary" id="simplePresetBtn">Simple traveller</button><button class="ghost" id="fullPresetBtn">Everything</button><button class="ghost" id="businessPresetBtn">Frequent traveller</button></div></article>
+            <div class="content-heading"><div><h3>Modules</h3><p>Changes persist on this device.</p></div></div>
+            <div class="module-grid" id="moduleGrid">
+              <div class="module-row"><div><b>Live flight map</b><small>Aircraft tracking and route progress.</small></div><label class="switch"><input type="checkbox" data-feature-toggle="map"><span></span></label></div>
+              <div class="module-row"><div><b>Destination & eSIM</b><small>Local tools, Saily and airport transport.</small></div><label class="switch"><input type="checkbox" data-feature-toggle="explore"><span></span></label></div>
+              <div class="module-row"><div><b>Money & refunds</b><small>Spend, ancillaries and money at risk.</small></div><label class="switch"><input type="checkbox" data-feature-toggle="money"><span></span></label></div>
+              <div class="module-row"><div><b>AI Concierge</b><small>Trip-aware travel assistant.</small></div><label class="switch"><input type="checkbox" data-feature-toggle="assistant"><span></span></label></div>
+              <div class="module-row"><div><b>Travel ID</b><small>Passport vault/autofill concept.</small></div><label class="switch"><input type="checkbox" data-feature-toggle="travelid"><span></span></label></div>
+              <div class="module-row"><div><b>Points & loyalty</b><small>Roadmap preview only in V1.</small></div><label class="switch"><input type="checkbox" data-feature-toggle="loyalty"><span></span></label></div>
+              <div class="module-row"><div><b>Alerts</b><small>Trip changes and action reminders.</small></div><label class="switch"><input type="checkbox" data-feature-toggle="notifications"><span></span></label></div>
+            </div>
+          </section>
+
+          <!-- NOTIFICATIONS -->
+          <section class="app-section" id="notificationsSection">
+            <div class="section-actions-row"><div><h2>Notifications</h2><p>Important trip changes and actions.</p></div><button class="ghost" id="markAllReadBtn">Mark all read</button></div>
+            <div id="notificationsList" class="notification-list"></div>
+          </section>
+
+          <!-- SETTINGS -->
+          <section class="app-section" id="settingsSection">
+            <div class="settings-grid">
+              <article class="panel">
+                <h3>Profile</h3>
+                <div class="form-grid">
+                  <label>Full name<input id="profileName" value="Alex Hay"></label>
+                  <label>Email<input id="profileEmail" value="alex@example.com"></label>
+                  <label>Home currency<select id="homeCurrency"><option>AUD</option><option>USD</option><option>GBP</option><option>HKD</option></select></label>
+                  <label>Home airport<input id="homeAirport" value="SYD"></label>
+                </div>
+                <button class="primary" id="saveProfileBtn">Save changes</button>
+              </article>
+              <article class="panel">
+                <h3>Connections</h3>
+                <div class="connection-list">
+                  <div><span class="connection-icon">G</span><div><b>Gmail / inbox</b><small>Automatic booking import</small></div><span class="coming-pill">COMING SOON</span></div>
+                  <div><span class="connection-icon">QF</span><div><b>Airline accounts</b><small>Trips + ancillaries + status</small></div><span class="coming-pill">COMING SOON</span></div>
+                  <div><span class="connection-icon">◇</span><div><b>Loyalty programs</b><small>Balances + status + expiry</small></div><span class="coming-pill">COMING SOON</span></div>
+                </div>
+              </article>
+              <article class="panel">
+                <h3>Notifications</h3>
+                <div class="toggle-list"><label><span>Flight changes</span><input type="checkbox" checked></label><label><span>Refund alerts</span><input type="checkbox" checked></label><label><span>Points expiry</span><input type="checkbox" checked></label><label><span>Destination reminders</span><input type="checkbox"></label></div>
+              </article>
+              <article class="panel">
+                <h3>Demo data</h3>
+                <p>Reset the prototype back to its original state.</p>
+                <button class="danger" id="resetDemoBtn">Reset demo data</button>
+              </article>
+            </div>
+          </section>
+
+          <!-- BILLING -->
+          <section class="app-section" id="billingSection">
+            <div class="section-actions-row"><div><h2>Plan & billing</h2><p>V1 checkout demonstration. No real money is charged.</p></div></div>
+            <div class="pricing-grid app-pricing">
+              <article class="price-card"><div class="price-name">Free</div><div class="price">$0</div><ul><li>Trip dashboard</li><li>Basic flight status</li></ul><button class="ghost full plan-btn" data-plan="Free">Switch to Free</button></article>
+              <article class="price-card featured"><div class="popular">CURRENT</div><div class="price-name">Monthly</div><div class="price">$4.99 <small>/ month</small></div><ul><li>AI concierge</li><li>Refund tracking</li><li>Live flight map</li></ul><button class="primary full plan-btn" data-plan="Monthly">Choose Monthly</button></article>
+              <article class="price-card"><div class="price-name">Annual</div><div class="price">$19.99 <small>/ year</small></div><ul><li>Everything in Monthly</li><li>Best value</li></ul><button class="ghost full plan-btn" data-plan="Annual">Choose Annual</button></article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <div id="modalBackdrop" class="modal-backdrop hidden">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-head"><h3 id="modalTitle">Modal</h3><button class="close-btn" id="closeModal">×</button></div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const clone=o=>JSON.parse(JSON.stringify(o));
+const initialState={
+  onboardingComplete:false,
+  plan:"Monthly",
+  profile:{name:"Alex Hay",email:"alex@example.com",currency:"AUD",airport:"SYD"},
+  connections:{gmail:false,qantas:true,marriott:true},
+  connectedPrograms:["Qantas Frequent Flyer","Marriott Bonvoy","Membership Rewards"],
+  purchasedEsims:[],savedTips:[],savedTransport:[],partnerInquiries:[],
+  flightStatus:{label:"ON TIME",detail:"On time",gate:"23",updated:"Just now"},
+  trips:[
+    {id:1,title:"Hong Kong → Sydney",route:"HKG → SYD",dates:"9–10 Oct 2026",status:"Active",flight:"QF128"},
+    {id:2,title:"Sydney → Singapore",route:"SYD → SIN",dates:"15–20 Dec 2026",status:"Upcoming",flight:"SQ232"},
+    {id:3,title:"Melbourne weekend",route:"SYD → MEL",dates:"2–4 May 2026",status:"Past",flight:"QF435"}
+  ],
+  expenses:[
+    {id:1,icon:"✈",name:"Flight change",detail:"Qantas · 3 Oct",amount:150},
+    {id:2,icon:"💺",name:"Extra-legroom seat",detail:"Qantas paid seat",amount:100},
+    {id:3,icon:"⌁",name:"eSIM",detail:"Demo provider",amount:12.99},
+    {id:4,icon:"🚆",name:"Airport Express",detail:"Hong Kong",amount:50}
+  ],
+  refundReceived:false,
+  notifications:[
+    {id:1,icon:"↺",title:"Paid-seat refund detected",body:"Qantas says an eligible paid-seat refund was processed separately.",time:"3 Oct",unread:true,target:"money"},
+    {id:2,icon:"✈",title:"QF128 is on time",body:"Current demo status: scheduled departure 19:30 from HKG Terminal 1.",time:"Today",unread:true,target:"flight"},
+    {id:3,icon:"⌁",title:"Destination pack ready",body:"Hong Kong eSIM, transport and money tools are ready for your trip.",time:"Today",unread:true,target:"explore"}
+  ],
+  features:{map:true,explore:true,money:true,assistant:true,travelid:true,loyalty:false,notifications:true},
+  travelIdUnlocked:false,
+  trackingPaused:false
+};
+let state=loadState();
+function loadState(){try{return {...clone(initialState),...JSON.parse(localStorage.getItem("waypointState")||"null")}}catch{return clone(initialState)}}
+const save=()=>localStorage.setItem("waypointState",JSON.stringify(state));
+function toast(msg){const t=$("#toast");t.textContent=msg;t.style.display="block";clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.style.display="none",2300)}
+function escapeHtml(str){return String(str).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function addNotification(icon,title,body,target="dashboard"){
+  state.notifications.unshift({id:Date.now(),icon,title,body,time:"Now",unread:true,target});save();renderNotifications();
+}
+
+/* routing / shareability */
+const titles={dashboard:["Home","Your travel command center"],trips:["Trips","Upcoming and past travel"],flight:["Flight details","QF128 · HKG → SYD"],map:["Live flight map","Track QF128 across the route"],explore:["Explore","Destination tools for Hong Kong"],loyalty:["Points & loyalty","Coming soon"],money:["Money","Spend and refund tracking"],assistant:["AI Concierge","Trip-aware travel assistant"],travelid:["Travel ID","Secure identity & booking autofill concept"],customize:["Customize","Choose what Waypoint shows you"],notifications:["Alerts","Important trip changes"],settings:["Settings","Profile, connections and preferences"],billing:["Plan & billing","Manage your Waypoint subscription"]};
+function showLanding(updateHash=true){$("#landingView").classList.remove("hidden");$("#appView").classList.add("hidden");$(".site-header").classList.remove("hidden");if(updateHash)history.replaceState(null,"",location.pathname+location.search+"#home");window.scrollTo(0,0)}
+function showApp(section="dashboard",updateHash=true){$("#landingView").classList.add("hidden");$("#appView").classList.remove("hidden");$(".site-header").classList.add("hidden");switchApp(section,updateHash);renderAll();window.scrollTo(0,0)}
+function switchApp(id,updateHash=true){
+  $$(".app-section").forEach(x=>x.classList.remove("active"));const sec=$("#"+id+"Section");if(sec)sec.classList.add("active");
+  $$(".app-nav button").forEach(b=>b.classList.toggle("active",b.dataset.app===id));const [t,s]=titles[id]||["Waypoint",""];$("#appPageTitle").textContent=t;$("#appPageSub").textContent=s;
+  if(updateHash)history.replaceState(null,"",location.pathname+location.search+`#app/${id}`);window.scrollTo(0,0)
+}
+function routeFromHash(){const h=location.hash.replace(/^#/,"");if(h.startsWith("app/")){showApp(h.split("/")[1]||"dashboard",false)}else showLanding(false)}
+window.addEventListener("hashchange",routeFromHash);
+$$("[data-app]").forEach(b=>b.addEventListener("click",()=>switchApp(b.dataset.app)));
+$("#appBrand").addEventListener("click",e=>{e.preventDefault();switchApp("dashboard")});
+$$("[data-scroll]").forEach(b=>b.onclick=()=>$("#"+b.dataset.scroll).scrollIntoView({behavior:"smooth"}));
+$("#heroTour").onclick=()=>$("#features").scrollIntoView({behavior:"smooth"});
+$("#insightDemoBtn").onclick=()=>showApp("flight");
+$("#demoButton").onclick=()=>showApp("dashboard");
+$("#viewFlightBtn").onclick=()=>switchApp("flight");
+
+/* modal */
+function modal(title,html){$("#modalTitle").textContent=title;$("#modalBody").innerHTML=html;$("#modalBackdrop").classList.remove("hidden")}
+function closeModal(){$("#modalBackdrop").classList.add("hidden")}
+$("#closeModal").onclick=closeModal;$("#modalBackdrop").onclick=e=>{if(e.target.id==="modalBackdrop")closeModal()};
+function onboarding(){
+  modal("Create your Waypoint demo",`<div class="modal-note">This creates a local demo account only. No real email, payment or travel account is connected.</div><div class="onboarding-grid" style="margin-top:12px"><label>Your name<input id="obName" value="${escapeHtml(state.profile.name)}"></label><label>Email<input id="obEmail" value="${escapeHtml(state.profile.email)}"></label><label>Home airport<input id="obAirport" value="${escapeHtml(state.profile.airport)}"></label><label>Home currency<select id="obCurrency"><option>AUD</option><option>USD</option><option>GBP</option><option>HKD</option></select></label></div><label style="margin-top:10px">Choose a demo plan<select id="obPlan"><option value="Free">Free</option><option value="Monthly" selected>Monthly · $4.99</option><option value="Annual">Annual · $19.99</option></select></label><button class="primary full" id="finishOnboarding" style="margin-top:12px">Enter Waypoint</button>`);
+  setTimeout(()=>{$("#obCurrency").value=state.profile.currency;$("#obPlan").value=state.plan},0)
+}
+$("#headerCta").onclick=onboarding;$("#heroStart").onclick=onboarding;
+$("#partnerBtn").onclick=()=>modal("Partner demo",`<p>Tell us about your airline or travel brand. This saves locally in the demo.</p><label>Company<input id="partnerCompany" placeholder="Example Airways"></label><label>Work email<input id="partnerEmail" placeholder="name@company.com"></label><label>What are you interested in?<select id="partnerUse"><option>White-label travel assistant</option><option>Disruption intelligence</option><option>Loyalty assistant</option><option>Destination services</option></select></label><button class="primary full" id="sendPartner">Request demo</button>`);
+
+document.addEventListener("click",e=>{
+  if(e.target.id==="finishOnboarding"){
+    state.profile.name=$("#obName").value.trim()||"Alex Hay";state.profile.email=$("#obEmail").value.trim()||"alex@example.com";state.profile.airport=$("#obAirport").value.trim()||"SYD";state.profile.currency=$("#obCurrency").value;state.plan=$("#obPlan").value;state.onboardingComplete=true;save();closeModal();showApp("dashboard");toast("Demo account created")
+  }
+  if(e.target.id==="sendPartner"){
+    const inquiry={id:Date.now(),company:$("#partnerCompany").value.trim()||"Example Airways",email:$("#partnerEmail").value.trim()||"name@company.com",use:$("#partnerUse").value};state.partnerInquiries.push(inquiry);save();$("#modalBody").innerHTML=`<div class="success-card"><b>Partner request saved</b><p>In a production site this would submit to your CRM or sales inbox.</p></div><button class="primary full" id="closePartnerSuccess" style="margin-top:12px">Done</button>`
+  }
+  if(e.target.id==="closePartnerSuccess")closeModal();
+});
+
+/* sharing */
+async function shareDemo(){
+  const url=location.href.replace(/#.*$/,"")+"#app/dashboard";
+  try{if(navigator.share){await navigator.share({title:"Waypoint product demo",text:"Waypoint AI travel companion demo",url});return}if(navigator.clipboard){await navigator.clipboard.writeText(url);toast("Demo link copied") }else throw 0}catch{modal("Share demo",`<p>Copy this URL after you host the static site:</p><label>Demo URL<input value="${escapeHtml(url)}" readonly onclick="this.select()"></label><div class="modal-note">The current ChatGPT sandbox link is for your session. For a public link, upload the project folder to Netlify, Vercel or GitHub Pages.</div>`)}
+}
+$("#shareDemoBtn").onclick=shareDemo;
+
+/* plans */
+function selectPlan(plan){
+  if(plan==="Free"){state.plan=plan;save();renderAll();toast("Switched to Free");if($("#appView").classList.contains("hidden"))showApp("billing");return}
+  const price=plan==="Annual"?"A$19.99 / year":"A$4.99 / month";
+  modal(`Upgrade to ${plan}`,`<div class="test-badge">TEST CHECKOUT · NO REAL CHARGE</div><div class="checkout-summary"><div class="row"><span>Waypoint ${plan}</span><b>${price}</b></div><div class="row"><span>Due today</span><b>${price.split(" / ")[0]}</b></div></div><label>Name on card<input id="payName" value="Alex Morgan"></label><label>Card number<input id="payCard" inputmode="numeric" value="4242 4242 4242 4242"></label><div class="card-row"><label>Expiry<input id="payExpiry" value="12/30"></label><label>CVC<input id="payCvc" value="123"></label><label>Postcode<input id="payPostcode" value="2000"></label></div><button class="primary full" id="completeTestPayment" data-plan="${plan}">Complete test payment</button><p class="muted-text" style="font-size:11px;margin-top:10px">This V1 validates the checkout UX only. Stripe/real billing can replace this test step later.</p>`)
+}
+$$(".plan-btn").forEach(b=>b.onclick=()=>selectPlan(b.dataset.plan));
+document.addEventListener("click",e=>{if(e.target.id==="completeTestPayment"){const digits=(($("#payCard")?.value)||"").replace(/\D/g,"");if(digits.length<16){toast("Enter the demo card number");return}state.plan=e.target.dataset.plan;save();closeModal();renderAll();addNotification("✓","Test payment complete",`Waypoint ${state.plan} is now active in the demo.`,"billing");toast("Test payment approved")}});
+
+/* trip management */
+function tripModal(){modal("Add trip",`<p class="muted-text">Create a new trip that persists in this browser.</p><label>Trip name<input id="tripName" placeholder="Tokyo weekend"></label><label>Route<input id="tripRoute" placeholder="SYD → HND"></label><label>Dates<input id="tripDates" placeholder="18–23 Jan 2027"></label><label>Flight<input id="tripFlight" placeholder="QF25"></label><button class="primary full" id="saveTrip">Add trip</button>`)}
+$("#addTripBtn").onclick=tripModal;$("#addTripBtn2").onclick=tripModal;
+document.addEventListener("click",e=>{
+  if(e.target.id==="saveTrip"){
+    const title=$("#tripName").value.trim()||"New trip",route=$("#tripRoute").value.trim()||"SYD → ???",dates=$("#tripDates").value.trim()||"Dates TBD",flight=$("#tripFlight").value.trim()||"TBD";
+    state.trips.unshift({id:Date.now(),title,route,dates,status:"Upcoming",flight});addNotification("✈","Trip added",`${title} is now in your trip list.`,"trips");save();renderTrips();closeModal();toast("Trip added")
+  }
+  if(e.target.matches(".delete-trip")){state.trips=state.trips.filter(t=>t.id!==Number(e.target.dataset.id));save();renderTrips();toast("Trip removed")}
+  if(e.target.matches(".open-trip")){const trip=state.trips.find(t=>t.id===Number(e.target.dataset.id));if(trip?.id===1)switchApp("flight");else modal(trip?.title||"Trip",`<div class="success-card"><b>${escapeHtml(trip?.route||"")}</b><p>${escapeHtml(trip?.dates||"")} · ${escapeHtml(trip?.flight||"")}</p></div><p>This trip is fully navigable as a saved demo item. The detailed flight screen is currently built for QF128.</p><button class="primary full" id="closeTripModal">Done</button>`)}
+  if(e.target.id==="closeTripModal")closeModal();
+});
+function renderTrips(){$("#tripCards").innerHTML=state.trips.map(t=>`<article class="trip-card"><div class="trip-top"><span class="badge ${t.status==="Active"?"ok":"pending"}">${t.status.toUpperCase()}</span><button class="link-btn delete-trip" data-id="${t.id}">Remove</button></div><h3>${escapeHtml(t.title)}</h3><div class="trip-route">${escapeHtml(t.route)}</div><div class="trip-date">${escapeHtml(t.dates)} · ${escapeHtml(t.flight)}</div><p>${t.status==="Active"?"Your current trip with flight and destination intelligence.":"Saved travel plan in the prototype."}</p><button class="ghost full open-trip" data-id="${t.id}">Open trip</button></article>`).join("")}
+
+/* Flight actions */
+$("#refreshFlightBtn").onclick=()=>{
+  const choices=[{label:"ON TIME",detail:"On time",gate:"23"},{label:"BOARDING 20:05",detail:"Boarding expected 20:05",gate:"23"},{label:"DELAYED 25M",detail:"Delayed 25 minutes",gate:"25"}];
+  const current=state.flightStatus.label;let next=choices[(choices.findIndex(x=>x.label===current)+1)%choices.length];state.flightStatus={...next,updated:"Just now"};save();renderFlightStatus();addNotification("✈",`QF128: ${next.label}`,`Gate ${next.gate}. Status refreshed in the demo.`,"flight");toast("Flight status refreshed")
+};
+function renderFlightStatus(){const b=$("#flightStatusBadge"),t=$("#flightStatusText");if(!b||!t)return;b.textContent=state.flightStatus.label;t.textContent=state.flightStatus.detail;b.classList.add("flight-pulse");setTimeout(()=>b.classList.remove("flight-pulse"),700)}
+function downloadFile(name,type,content){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+$("#downloadItineraryBtn").onclick=()=>downloadFile("Waypoint-QF128-itinerary.txt","text/plain",`WAYPOINT TRIP ITINERARY\n\nQF128 Hong Kong (HKG) → Sydney (SYD)\nFriday 9 October 2026\nDeparture: 19:30, Terminal 1, Gate ${state.flightStatus.gate}\nArrival: 07:45 Saturday 10 October, Terminal 1\nSeat: 40D\nCabin: Economy (L)\nStatus: ${state.flightStatus.detail}\n\nTravel intelligence\n- Paid extra-legroom seat: ~A$100\n- Flight change cost: A$150\n- Qantas refund email detected\n`);
+$("#calendarBtn").onclick=()=>downloadFile("QF128.ics","text/calendar",`BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Waypoint//Demo//EN\nBEGIN:VEVENT\nUID:qf128-waypoint-demo\nDTSTAMP:20261006T071900Z\nDTSTART:20261009T113000Z\nDTEND:20261009T204500Z\nSUMMARY:QF128 Hong Kong to Sydney\nLOCATION:Hong Kong International Airport Terminal 1\nDESCRIPTION:Seat 40D. Waypoint demo itinerary.\nEND:VEVENT\nEND:VCALENDAR`);
+
+/* destination */
+$$("[data-dtab]").forEach(b=>b.onclick=()=>destTab(b.dataset.dtab));$$("[data-dtab-jump]").forEach(b=>b.onclick=()=>destTab(b.dataset.dtabJump));
+function destTab(id){$$(".dest-tab").forEach(x=>x.classList.remove("active"));$("#dest"+id[0].toUpperCase()+id.slice(1)).classList.add("active");$$("[data-dtab]").forEach(b=>b.classList.toggle("active",b.dataset.dtab===id))}
+const esims=[{name:"GlobalConnect",data:"10GB",days:"30 days",price:"US$12.99",aud:19.99,tag:"Best value"},{name:"AsiaRoam",data:"5GB",days:"15 days",price:"US$8.50",aud:13.1,tag:"Light use"},{name:"MaxData",data:"20GB",days:"30 days",price:"US$21.00",aud:32.4,tag:"Heavy use"}];
+function renderEsims(){$("#esimGrid").innerHTML=esims.map((p,i)=>{const purchased=state.purchasedEsims.includes(p.name);return`<article class="esim-plan ${i===0?"featured":""}"><div class="kicker">${p.tag}</div><h3>${p.name}</h3>${purchased?'<span class="purchase-tag">ACTIVE IN DEMO</span>':""}<div class="price">${p.price}</div><ul><li>${p.data}</li><li>${p.days}</li><li>Instant activation</li><li>Fictional demo provider</li></ul><button class="${purchased?"ghost disabledish":i===0?"primary":"ghost"} full esim-buy" data-plan="${p.name}" ${purchased?"disabled":""}>${purchased?"Purchased":"Choose plan"}</button></article>`}).join("")}
+document.addEventListener("click",e=>{
+  if(e.target.matches(".esim-buy")&&!e.target.disabled){const p=esims.find(x=>x.name===(e.target.dataset.plan||"GlobalConnect"));modal("eSIM checkout",`<div class="success-card"><b>${p.name} · ${p.data}</b><p>${p.days} for ${p.price}. Fictional provider for product demonstration.</p></div><label>Activation email<input id="esimEmail" value="${escapeHtml(state.profile.email)}"></label><label>Payment method<select><option>Visa •••• 4242 (demo)</option><option>Apple Pay (demo)</option></select></label><button class="primary full" id="confirmEsim" data-plan="${p.name}">Confirm demo purchase</button>`)}
+  if(e.target.id==="confirmEsim"){
+    const p=esims.find(x=>x.name===e.target.dataset.plan);if(!state.purchasedEsims.includes(p.name)){state.purchasedEsims.push(p.name);state.expenses.push({id:Date.now(),icon:"⌁",name:`${p.name} eSIM`,detail:`${p.data} · ${p.days}`,amount:p.aud});addNotification("⌁","eSIM activated",`${p.name} ${p.data} is now attached to your Hong Kong trip.`,"explore")}save();renderAll();closeModal();toast("Demo eSIM activated")
+  }
+});
+$("#saveTipBtn").onclick=()=>{if(!state.savedTips.includes("Octopus"))state.savedTips.push("Octopus");save();toast("Octopus tip saved")};
+$$(".save-transport").forEach(b=>b.onclick=()=>{const name=b.closest(".transport-option").querySelector("h3").textContent;if(!state.savedTransport.includes(name))state.savedTransport.push(name);save();toast(`${name} saved to trip`)});
+$("#hkdInput").oninput=()=>$("#audOutput").value=(Number($("#hkdInput").value||0)*.20).toFixed(2);
+
+/* expenses + refund */
+function renderExpenses(){const total=state.expenses.reduce((a,b)=>a+Number(b.amount),0);$("#expenseList").innerHTML=state.expenses.map(x=>`<div class="expense-row"><span class="expense-icon">${x.icon}</span><div><b>${escapeHtml(x.name)}</b><small>${escapeHtml(x.detail)}</small></div><strong>A$${Number(x.amount).toFixed(2)}</strong></div>`).join("");$("#tripSpend").textContent=`A$${total.toFixed(2)}`;$("#netTripCost").textContent=`~A$${(total-(state.refundReceived?0:100)).toFixed(2)}`;$("#markRefundBtn").textContent=state.refundReceived?"Refund received ✓":"Mark as received";$("#markRefundBtn").disabled=state.refundReceived}
+$("#addExpenseBtn").onclick=()=>modal("Add expense",`<label>Description<input id="expenseName" placeholder="Airport meal"></label><label>Amount (AUD)<input id="expenseAmount" type="number" min="0" step="0.01" placeholder="24.50"></label><button class="primary full" id="saveExpense">Add expense</button>`);
+document.addEventListener("click",e=>{if(e.target.id==="saveExpense"){const name=$("#expenseName").value.trim()||"Travel expense",amount=Number($("#expenseAmount").value||0);if(amount<=0){toast("Enter an amount");return}state.expenses.push({id:Date.now(),icon:"$",name,detail:"Manual entry",amount});save();renderExpenses();closeModal();toast("Expense added")}});
+$("#refundWatchBtn").onclick=()=>{switchApp("money");toast("Refund watch opened")};
+$("#markRefundBtn").onclick=()=>{if(state.refundReceived)return;state.refundReceived=true;addNotification("✓","Refund marked received","You marked the extra-legroom refund as received.","money");save();renderAll();toast("Refund marked as received")};
+
+/* loyalty */
+const connectProgramBtn=$("#connectProgramBtn");if(connectProgramBtn)connectProgramBtn.onclick=()=>modal("Connect loyalty program",`<p>Choose a program to add to this demo wallet.</p><label>Program<select id="programSelect"><option>Velocity Frequent Flyer</option><option>Hilton Honors</option><option>Avios</option><option>KrisFlyer</option></select></label><button class="primary full" id="connectSelected">Connect program</button>`);
+document.addEventListener("click",e=>{if(e.target.id==="connectSelected"){const p=$("#programSelect").value;if(!state.connectedPrograms.includes(p))state.connectedPrograms.push(p);addNotification("◇","Loyalty program connected",`${p} is now connected in the demo.`,"loyalty");save();closeModal();toast(`${p} connected`)}});
+const askPointsBtn=$("#askPointsBtn");if(askPointsBtn)askPointsBtn.onclick=()=>{switchApp("assistant");setTimeout(()=>sendChat("How should I use my points for a Sydney to London business class trip?"),100)};
+
+/* assistant */
+function aiReply(q){const s=q.toLowerCase();if(s.includes("leave")&&s.includes("airport"))return"For your 19:30 international departure from HKG, I’d target arriving around 16:30. With roughly 45–60 minutes of travel, leaving about 15:20–15:30 gives you a comfortable buffer.";if(s.includes("seat")||s.includes("refund"))return state.refundReceived?"Your extra-legroom refund is marked as received in Waypoint. The original demo purchase was about A$100 and your current seat is 40D.":"Your current demo flight shows seat 40D. The trip ledger shows roughly A$100 paid for extra legroom, and the Qantas refund email indicates an eligible paid-seat refund was processed separately to the original payment method.";if(s.includes("esim"))return state.purchasedEsims.length?`You already activated ${state.purchasedEsims[0]} in the demo. It is attached to your Hong Kong trip.`:"For the demo, I’d pick GlobalConnect 10GB / 30 days at US$12.99. Open Explore → eSIM to purchase it.";if(s.includes("points")||s.includes("london"))return"Points & loyalty are intentionally marked Coming Soon in V1. The planned version will compare balances, transfer partners, award space and redemption value.";if(s.includes("currency")||s.includes("hkd"))return"The prototype uses a fixed demo rate of 1 HKD ≈ A$0.20. Open Explore → Money for the converter.";if(s.includes("map")||s.includes("where is")||s.includes("flight")||s.includes("qf128"))return`QF128 currently shows ${state.flightStatus.detail.toLowerCase()}, departing Hong Kong at 19:30 on 9 October and arriving Sydney at 07:45 on 10 October. Seat 40D, Terminal 1, Gate ${state.flightStatus.gate}. The Live Map tab shows a simulated V1 position and telemetry feed.`;return"I can help with QF128, airport timing, seat/refund status, Hong Kong destination tools, eSIMs, points and travel money. Try asking what happened to your extra-legroom seat."}
+function sendChat(prefill){const input=$("#chatInput"),q=(prefill||input.value).trim();if(!q)return;const box=$("#chatMessages");box.insertAdjacentHTML("beforeend",`<div class="chat-msg user">${escapeHtml(q)}</div>`);input.value="";box.scrollTop=box.scrollHeight;setTimeout(()=>{box.insertAdjacentHTML("beforeend",`<div class="chat-msg ai">${aiReply(q)}</div>`);box.scrollTop=box.scrollHeight},300)}
+$("#chatSend").onclick=()=>sendChat();$("#chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat()});$$(".suggestion").forEach(b=>b.onclick=()=>sendChat(b.textContent));
+
+/* notifications */
+function renderNotifications(){const unread=state.notifications.filter(n=>n.unread).length;$("#notifCount").textContent=unread;$("#notificationsList").innerHTML=state.notifications.map(n=>`<article class="notification ${n.unread?"unread":""}" data-id="${n.id}" data-target="${n.target||"dashboard"}"><span class="notification-icon">${n.icon}</span><div><b>${escapeHtml(n.title)}</b><small>${escapeHtml(n.body)}</small></div><time>${escapeHtml(n.time)}</time></article>`).join("")}
+$("#markAllReadBtn").onclick=()=>{state.notifications.forEach(n=>n.unread=false);save();renderNotifications();toast("All notifications marked read")};
+document.addEventListener("click",e=>{const n=e.target.closest(".notification");if(!n)return;const item=state.notifications.find(x=>x.id===Number(n.dataset.id));if(item){item.unread=false;save();renderNotifications();switchApp(n.dataset.target||"dashboard")}});
+
+/* settings / connections */
+function renderProfile(){if(!$("#profileName"))return;$("#profileName").value=state.profile.name;$("#profileEmail").value=state.profile.email;$("#homeCurrency").value=state.profile.currency;$("#homeAirport").value=state.profile.airport;$$(".connect-btn").forEach(b=>{const on=!!state.connections[b.dataset.key];b.textContent=on?"Connected":"Connect";b.classList.toggle("connected",on)})}
+$("#saveProfileBtn").onclick=()=>{state.profile={name:$("#profileName").value,currency:$("#homeCurrency").value,email:$("#profileEmail").value,airport:$("#homeAirport").value};save();renderAll();toast("Profile saved")};
+$$(".connect-btn").forEach(b=>b.onclick=()=>{const key=b.dataset.key;if(!state.connections[key]){modal(`Connect ${b.dataset.name}`,`<div class="modal-note">This simulates an OAuth connection. No real credentials are requested.</div><label>Account email<input value="${escapeHtml(state.profile.email)}"></label><button class="primary full" id="confirmConnection" data-key="${key}" data-name="${b.dataset.name}">Authorize demo connection</button>`)}else{state.connections[key]=false;save();renderProfile();toast(`${b.dataset.name} disconnected`)}});
+document.addEventListener("click",e=>{if(e.target.id==="confirmConnection"){state.connections[e.target.dataset.key]=true;save();closeModal();renderProfile();addNotification("✓",`${e.target.dataset.name} connected`,`The demo connection is now active.`,"settings");toast(`${e.target.dataset.name} connected`)}});
+$("#resetDemoBtn").onclick=()=>{if(confirm("Reset all prototype data?")){state=clone(initialState);save();renderAll();toast("Demo data reset")}};
+
+/* account */
+$("#profileButton").onclick=()=>modal("Account",`<p><b>${escapeHtml(state.profile.name)}</b><br><span class="muted-text">${escapeHtml(state.profile.email)}</span></p><div class="demo-chip">Demo account · ${escapeHtml(state.plan)} plan</div><button class="ghost full" id="accountSettings" style="margin-top:12px">Open settings</button><button class="danger full" style="margin-top:8px" id="exitDemo">Exit demo</button>`);
+document.addEventListener("click",e=>{if(e.target.id==="accountSettings"){closeModal();switchApp("settings")}if(e.target.id==="exitDemo"){closeModal();showLanding()}});
+const bell=$(".app-actions [data-app='notifications']");if(bell)bell.onclick=()=>switchApp("notifications");
+
+function renderBilling(){
+  $$("#billingSection .price-card").forEach(c=>c.classList.remove("billing-current"));
+  $$("#billingSection .plan-btn").forEach(b=>{const active=b.dataset.plan===state.plan;b.textContent=active?"Current plan":b.dataset.plan==="Free"?"Switch to Free":`Choose ${b.dataset.plan}`;b.closest(".price-card").classList.toggle("billing-current",active)});
+}
+function renderName(){const btn=$("#profileButton");if(btn){const spans=btn.querySelectorAll("span");if(spans[1])spans[1].textContent=state.profile.name}}
+function applyFeatureVisibility(){
+  state.features=state.features||clone(initialState.features);
+  $$('[data-feature]').forEach(el=>{const f=el.dataset.feature;if(f&&state.features[f]===false)el.classList.add('feature-hidden');else el.classList.remove('feature-hidden')});
+  $$('[data-feature-toggle]').forEach(cb=>{cb.checked=state.features[cb.dataset.featureToggle]!==false});
+}
+function renderTravelId(){const card=$("#identityCard"),badge=$("#idLockBadge"),btn=$("#unlockTravelIdBtn");if(!card)return;const unlocked=!!state.travelIdUnlocked;card.classList.toggle("locked",!unlocked);badge.textContent=unlocked?"UNLOCKED":"LOCKED";btn.textContent=unlocked?"Lock demo identity":"Unlock demo identity"}
+function renderAll(){renderTrips();renderEsims();renderExpenses();renderNotifications();renderProfile();renderFlightStatus();renderBilling();renderName();applyFeatureVisibility();renderTravelId();$("#sidePlan").textContent=state.plan==="Monthly"?"Waypoint Plus":state.plan==="Annual"?"Waypoint Pro":"Waypoint Free"}
+
+/* live map */
+let mapProgress=34;
+function updateMap(){const plane=$("#livePlane"),path=$("#routeProgressPath");if(!plane||!path)return;const p=Math.max(0,Math.min(100,mapProgress));const t=p/100;const left=68 + 6*Math.sin(t*Math.PI*.55);const top=29 + 50*t;plane.style.left=left+"%";plane.style.top=top+"%";path.style.strokeDashoffset=String(100-p);$("#mapProgressLabel").textContent=Math.round(p)+"%";$("#mapAltitude").textContent=(34900+Math.round(Math.sin(t*4)*180))+" ft";$("#mapSpeed").textContent=(866+Math.round(Math.cos(t*5)*16))+" km/h";$("#mapStatusText").textContent=`Demo position · ${Math.round(p)}% of route complete.`}
+setInterval(()=>{if(!state.trackingPaused){mapProgress+=.22;if(mapProgress>92)mapProgress=28;updateMap()}},1000);
+$("#recenterMapBtn").onclick=()=>{mapProgress=34;updateMap();toast("QF128 recentered")};
+$("#toggleTrackingBtn").onclick=e=>{state.trackingPaused=!state.trackingPaused;save();e.target.textContent=state.trackingPaused?"Resume":"Pause";toast(state.trackingPaused?"Tracking paused":"Tracking resumed")};
+$("#mapAskAiBtn").onclick=()=>{switchApp("assistant");setTimeout(()=>sendChat("Where is QF128 right now on the map?"),120)};
+
+/* travel identity autofill demo */
+$("#unlockTravelIdBtn").onclick=()=>{state.travelIdUnlocked=!state.travelIdUnlocked;save();renderTravelId();toast(state.travelIdUnlocked?"Demo identity unlocked":"Demo identity locked")};
+$("#openAutofillDemoBtn").onclick=()=>modal("Booking autofill demo",`<div class="test-badge">FAKE PASSPORT DATA ONLY</div><p class="muted-text">This demonstrates the user flow. It does not connect to an airline website or store a real passport.</p><div class="autofill-preview"><label>Given names<input id="afGiven" placeholder="Given names"></label><label>Surname<input id="afSurname" placeholder="Surname"></label><label>Date of birth<input id="afDob" placeholder="DD/MM/YYYY"></label><label>Nationality<input id="afNationality" placeholder="Nationality"></label><label>Passport number<input id="afPassport" placeholder="Passport number"></label><label>Passport expiry<input id="afExpiry" placeholder="DD/MM/YYYY"></label></div><button class="primary full" id="runAutofillBtn" style="margin-top:12px">Autofill from Waypoint ID</button><button class="ghost full" id="clearAutofillBtn" style="margin-top:8px">Clear</button>`);
+document.addEventListener("click",e=>{if(e.target.id==="runAutofillBtn"){if(!state.travelIdUnlocked){toast("Unlock Travel ID first");return}[["afGiven","Alex"],["afSurname","Morgan"],["afDob","12/03/1998"],["afNationality","Australian"],["afPassport","N1234567"],["afExpiry","14/06/2031"]].forEach(([id,v])=>{const el=$("#"+id);if(el)el.value=v});toast("Demo identity autofilled")}if(e.target.id==="clearAutofillBtn"){["afGiven","afSurname","afDob","afNationality","afPassport","afExpiry"].forEach(id=>{const el=$("#"+id);if(el)el.value=""})}});
+
+/* Saily referral handoff */
+const SAILY_REFERRAL_URL="https://saily.com/"; // replace with the user's exact referral URL before launch
+$("#openSailyBtn").onclick=()=>{window.open(SAILY_REFERRAL_URL,"_blank","noopener,noreferrer");toast("Opening Saily")};
+
+/* modular interface */
+document.addEventListener("change",e=>{if(e.target.matches("[data-feature-toggle]")){const key=e.target.dataset.featureToggle;state.features[key]=e.target.checked;save();applyFeatureVisibility();toast(`${key} ${e.target.checked?"shown":"hidden"}`)}});
+function setFeaturePreset(name){const presets={simple:{map:true,explore:true,money:false,assistant:true,travelid:false,loyalty:false,notifications:true},full:{map:true,explore:true,money:true,assistant:true,travelid:true,loyalty:true,notifications:true},business:{map:true,explore:true,money:true,assistant:true,travelid:true,loyalty:false,notifications:true}};state.features={...presets[name]};save();applyFeatureVisibility();toast(name==="simple"?"Simple traveller preset applied":name==="business"?"Frequent traveller preset applied":"Everything shown")}
+$("#simplePresetBtn").onclick=()=>setFeaturePreset("simple");$("#fullPresetBtn").onclick=()=>setFeaturePreset("full");$("#businessPresetBtn").onclick=()=>setFeaturePreset("business");
+
+renderAll();updateMap();routeFromHash();
+</script>
+</body>
+</html>
