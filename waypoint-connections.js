@@ -133,7 +133,7 @@ function saveImport(){
  state.wp2TripsUsed=used+1;
  state.wp3Imports.unshift({id,flight,route,date:dates,source:currentImport.source});
  state.wp3Imports=state.wp3Imports.slice(0,40);save();renderTrips();renderImports();
- if(typeof refreshHome==='function')refreshHome();
+ if(typeof window.waypointRefreshHome==='function')window.waypointRefreshHome();
  closeModal();currentImport=null;toast('Booking imported into Trips');switchApp('trips');
 }
 function info(type){
