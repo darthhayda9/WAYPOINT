@@ -100,7 +100,16 @@ module.exports=async function handler(req,res){
     body:JSON.stringify({model:process.env.WAYPOINT_AI_MODEL||'gpt-4o-mini',messages:[{role:'system',content:instructions},...messages],max_tokens:420,temperature:0.4})
    });
   }finally{clearTimeout(timeout)}
-  if(!api.ok)return respond(res,502,{error:'AI provider unavailable; confirm API billing and key permissions',code:'provider_error'});
+  if(!api.ok){
+    let reason='provider_unavailable';
+    try{
+      const failure=await api.json();
+      const raw=String(failure?.error?.code||failure?.error?.type||'').slice(0,80);
+      const recognised=['invalid_api_key','insufficient_quota','billing_hard_limit_reached','model_not_found','account_deactivated','rate_limit_exceeded','tokens'];
+      if(recognised.includes(raw))reason=raw;
+    }catch(e){}
+    return respond(res,502,{error:'AI provider did not accept the request',code:'provider_error',reason,provider_status:api.status});
+  }
   const body=await api.json();
   const reply=body?.choices?.[0]?.message?.content;
   if(typeof reply!=='string'||!reply.trim())return respond(res,502,{error:'The provider returned no answer',code:'empty_response'});
