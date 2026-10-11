@@ -169,7 +169,8 @@
       '<p>Waypoint can use a real AI model for open-ended travel questions during the investor demo. Enter the access code provided by the demo owner.</p>'+
       '<label>Investor access code<input id="wpAIInvestorCode" type="password" autocomplete="off" placeholder="Access code"></label>'+
       '<p class="muted-text" style="font-size:12px">This code is held only in the current browser session. Never enter an OpenAI API key here.</p>'+
-      '<button class="primary full" id="wpAIApplyCode">Continue to AI</button>');
+      '<button class="primary full" id="wpAIApplyCode">Continue to AI</button>'+
+      '<button class="ghost full" style="margin-top:9px" id="wpAITryLocal">Use demo answers instead</button>');
   }
   function aiGateInit(){
     var head=q('#assistantSection .chat-head');
@@ -181,10 +182,17 @@
     button.addEventListener('click',showAIUnlock);
     head.appendChild(button);
     document.addEventListener('click',function(e){
+      if(e.target.id==='wpAITryLocal'){
+        sessionStorage.setItem('waypointLocalAI','true');closeModal();button.textContent='Enable live AI';
+        if(aiQueuedQuestion){var qNext=aiQueuedQuestion;aiQueuedQuestion='';sendAI(qNext)}
+        else toast('Demo answer mode active');
+        return;
+      }
       if(e.target.id==='wpAIApplyCode'){
         var code=q('#wpAIInvestorCode')?.value.trim()||'';
         if(code.length<14){toast('Enter your complete investor access code');return}
         sessionStorage.setItem('waypointInvestorCode',code);
+        sessionStorage.removeItem('waypointLocalAI');
         closeModal();
         button.textContent='Change access code';
         if(aiQueuedQuestion){var next=aiQueuedQuestion;aiQueuedQuestion='';sendAI(next)}
@@ -200,7 +208,8 @@
     if(aiBusy)return;
     var input=q('#chatInput'),question=String(prefill||input.value||'').trim().slice(0,900);
     if(!question)return;
-    if(!sessionStorage.getItem('waypointInvestorCode')){
+    var localMode=sessionStorage.getItem('waypointLocalAI')==='true';
+    if(!sessionStorage.getItem('waypointInvestorCode')&&!localMode){
       aiQueuedQuestion=question;showAIUnlock();return;
     }
     input.value='';addMessage('user',question);state.wp2Chat=state.wp2Chat||[];
@@ -208,7 +217,7 @@
     aiBusy=true;q('#chatSend').disabled=true;
     var msg=addMessage('assistant','Thinking…');
     var answer='',real=false;
-    try{
+    if(!localMode)try{
       var recent=state.wp2Chat.slice(-12).map(function(m){return {role:m.role,content:m.content}});
       var context={tripCount:state.trips.length,trips:state.trips.slice(0,8).map(function(t){return {title:t.title,route:t.route,dates:t.dates,flight:t.flight}}),refundReceived:!!state.refundReceived,flightStatus:'Sample flight — no live data',homeCurrency:state.profile.currency};
       var controller=new AbortController();var tm=setTimeout(function(){controller.abort()},12000);
@@ -218,7 +227,11 @@
         else if(r.status===401){sessionStorage.removeItem('waypointInvestorCode');answer='That investor access code was not accepted. Select Unlock live AI and enter the correct code to retry.';var unlock=q('#wpAIUnlockButton');if(unlock)unlock.textContent='Unlock live AI';}
         else if(r.status===429){answer='This investor demo has reached its AI usage limit for now. You can still use the trip and travel tools without the model.';}
         else if(r.status===503){answer='The real AI connection has not been fully enabled yet. Please check the production environment settings.';}
-        else if(r.status===502){answer='The AI provider could not complete that request. Check the OpenAI project billing and try again.';}
+        else if(r.status===502){
+          var problem=await r.json().catch(function(){return {}});
+          if(problem.provider_status===429)answer='The OpenAI API is returning a usage or billing limit (HTTP 429). Check API billing, prepaid credits and project limits. You can still use Waypoint’s demo answers.';
+          else answer='The AI provider could not complete the request. Check API billing, permissions and the configured model.';
+        }
       }finally{clearTimeout(tm)}
     }catch(e){}
     if(!answer)answer=fallbackAI(question);
