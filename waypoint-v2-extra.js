@@ -80,6 +80,7 @@ function setup(){
   notice.innerHTML='<strong>Start free.</strong> Create three of your own trips with all the demo features. The preloaded example trips do not count. Deleting a created trip does not restore a credit.';
   const cards=one('#tripCards');cards.before(notice);
   annotateTrips();
+  if(window.MutationObserver&&cards){new MutationObserver(function(){annotateTrips()}).observe(cards,{childList:true})}
  }
  const money=one('#moneySection');if(money){
   const section=document.createElement('div');section.id='wp21Refunds';section.className='wp21-refund-section';
