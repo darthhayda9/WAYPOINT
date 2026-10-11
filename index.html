@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#07111f" />
   <meta name="description" content="Waypoint — AI travel companion prototype" />
-  <title>Waypoint V1 Investor Demo ·  — AI Travel Companion</title>
+  <title>Waypoint V2 — Your AI Travel Companion</title>
   <style>/* Waypoint full prototype */
 :root{
   --bg:#07111f;--bg2:#0b1727;--panel:#0f2135;--panel2:#132b45;--card:#142b45;
@@ -52,6 +52,7 @@
 @media(max-width:820px){.map-shell{min-height:610px}.map-telemetry{grid-template-columns:repeat(2,1fr)}.map-telemetry>div:last-child{grid-column:span 2}.map-overlay-card{max-width:210px}.map-controls{top:104px;right:14px}.module-grid,.autofill-preview,.saily-card{grid-template-columns:1fr}.saily-price{text-align:left}.card-row{grid-template-columns:1fr}.identity-card .id-grid{grid-template-columns:1fr 1fr}}
 
 </style>
+  <link rel="stylesheet" href="/waypoint-v2.css" />
 </head>
 <body>
   <div id="toast" class="toast"></div>
@@ -80,7 +81,7 @@
         <div class="hero-copy">
           <div class="kicker">AI travel companion</div>
           <h1>Your entire travel life, <span>in one place.</span></h1>
-          <p>Waypoint organizes bookings, tracks flights, watches travel spend and refunds, monitors loyalty balances, recommends eSIMs, and gives you a destination-aware AI assistant.</p>
+          <p>Waypoint brings bookings, sample flight maps, refunds, destination tools and a trip-aware assistant into one beautifully simple experience. Connected airline, loyalty and live AI services are coming next.</p>
           <div class="hero-actions">
             <button class="primary large" id="heroStart">Start with demo</button>
             <button class="ghost large" id="heroTour">Explore the product</button>
@@ -163,9 +164,9 @@
           <h2>Mass-market by design.</h2>
         </div>
         <div class="pricing-grid">
-          <article class="price-card"><div class="price-name">Free</div><div class="price">$0</div><p>Try the core organizer.</p><ul><li>Trip dashboard</li><li>Basic flight status</li><li>1 destination pack per trip</li></ul><button class="ghost full plan-btn" data-plan="Free">Choose Free</button></article>
-          <article class="price-card featured"><div class="popular">MOST POPULAR</div><div class="price-name">Monthly</div><div class="price">$4.99 <small>/ month</small></div><p>All the smart features.</p><ul><li>AI concierge</li><li>Refund tracking</li><li>eSIM and money tools</li><li>Loyalty dashboard</li></ul><button class="primary full plan-btn" data-plan="Monthly">Choose Monthly</button></article>
-          <article class="price-card"><div class="price-name">Annual</div><div class="price">$19.99 <small>/ year</small></div><p>Best value for regular travelers.</p><ul><li>Everything in Monthly</li><li>Unlimited trips</li><li>Priority notifications</li><li>Points optimization</li></ul><button class="ghost full plan-btn" data-plan="Annual">Choose Annual</button></article>
+          <article class="price-card"><div class="price-name">Free</div><div class="price">$0</div><p>Three full trips you create, free.</p><ul><li>Three trips to create</li><li>Trip dashboard and refund tracker</li><li>Destination tools and demo assistant</li></ul><button class="ghost full plan-btn" data-plan="Free">Choose Free</button></article>
+          <article class="price-card featured"><div class="popular">MOST POPULAR</div><div class="price-name">Monthly</div><div class="price">$4.99 <small>/ month</small></div><p>Unlimited trips for frequent travellers.</p><ul><li>AI concierge</li><li>Refund tracking</li><li>eSIM and money tools</li><li>Loyalty dashboard</li></ul><button class="primary full plan-btn" data-plan="Monthly">Choose Monthly</button></article>
+          <article class="price-card"><div class="price-name">Annual</div><div class="price">$24.99 <small>/ year</small></div><p>Unlimited trips at a mass-market price.</p><ul><li>Everything in Monthly</li><li>Unlimited trips</li><li>Priority notifications</li><li>Points optimization</li></ul><button class="ghost full plan-btn" data-plan="Annual">Choose Annual</button></article>
         </div>
       </section>
 
@@ -229,7 +230,7 @@
           <!-- DASHBOARD -->
           <section class="app-section active" id="dashboardSection">
             <div class="welcome-row">
-              <div><div class="kicker">WAYPOINT V1 · INVESTOR DEMO</div><h2>Your trip, under control.</h2><p>One place for flights, money, destination tools and AI.</p></div>
+              <div><div class="kicker">WAYPOINT V2 · INVESTOR DEMO</div><h2>Your trip, under control.</h2><p>One place for flights, money, destination tools and AI.</p></div>
               <button class="primary" id="addTripBtn">+ Add trip</button>
             </div>
 
@@ -310,7 +311,7 @@
 
           <!-- LIVE MAP -->
           <section class="app-section" id="mapSection">
-            <div class="section-actions-row"><div><h2>Live flight map</h2><p>QF128 · Hong Kong to Sydney · simulated V1 tracking feed.</p></div><div class="coming-pill"><span class="status-dot"></span> LIVE DEMO</div></div>
+            <div class="section-actions-row"><div><h2>Live flight map</h2><p>QF128 · Hong Kong to Sydney · simulated V1 tracking feed.</p></div><div class="coming-pill">SIMULATED DEMO</div></div>
             <div class="map-shell" id="flightMap">
               <div class="map-grid"></div><div class="map-land asia"></div><div class="map-land india"></div><div class="map-land japan"></div><div class="map-land africa"></div><div class="map-land aus"></div>
               <svg class="map-route" viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="routeGradient" x1="0" x2="1"><stop offset="0%" stop-color="#4d9fff"/><stop offset="100%" stop-color="#61dde6"/></linearGradient></defs><path class="route-base" d="M680 150 C720 220 760 330 740 410"/><path class="route-progress" id="routeProgressPath" pathLength="100" stroke-dasharray="100" stroke-dashoffset="66" d="M680 150 C720 220 760 330 740 410"/></svg>
@@ -413,7 +414,7 @@
                 </div>
               </aside>
               <div class="chat-panel">
-                <div class="chat-head"><div><b>Waypoint Concierge</b><span>Trip-aware demo</span></div><span class="badge ok">ONLINE</span></div>
+                <div class="chat-head"><div><b>Waypoint Concierge</b><span>Trip-aware demo</span></div><span class="badge ok">DEMO MODE</span></div>
                 <div id="chatMessages" class="chat-messages">
                   <div class="chat-msg ai">I know your current demo trip: QF128 from Hong Kong to Sydney on 9 October, departing 19:30, seat 40D. I can help with airport timing, the paid-seat refund, eSIMs, the live map and destination basics.</div>
                 </div>
@@ -492,7 +493,7 @@
             <div class="pricing-grid app-pricing">
               <article class="price-card"><div class="price-name">Free</div><div class="price">$0</div><ul><li>Trip dashboard</li><li>Basic flight status</li></ul><button class="ghost full plan-btn" data-plan="Free">Switch to Free</button></article>
               <article class="price-card featured"><div class="popular">CURRENT</div><div class="price-name">Monthly</div><div class="price">$4.99 <small>/ month</small></div><ul><li>AI concierge</li><li>Refund tracking</li><li>Live flight map</li></ul><button class="primary full plan-btn" data-plan="Monthly">Choose Monthly</button></article>
-              <article class="price-card"><div class="price-name">Annual</div><div class="price">$19.99 <small>/ year</small></div><ul><li>Everything in Monthly</li><li>Best value</li></ul><button class="ghost full plan-btn" data-plan="Annual">Choose Annual</button></article>
+              <article class="price-card"><div class="price-name">Annual</div><div class="price">$24.99 <small>/ year</small></div><ul><li>Everything in Monthly</li><li>Best value</li></ul><button class="ghost full plan-btn" data-plan="Annual">Choose Annual</button></article>
             </div>
           </section>
         </div>
@@ -512,7 +513,7 @@
 const clone=o=>JSON.parse(JSON.stringify(o));
 const initialState={
   onboardingComplete:false,
-  plan:"Monthly",
+  plan:"Free",
   profile:{name:"Alex Hay",email:"alex@example.com",currency:"AUD",airport:"SYD"},
   connections:{gmail:false,qantas:true,marriott:true},
   connectedPrograms:["Qantas Frequent Flyer","Marriott Bonvoy","Membership Rewards"],
@@ -572,7 +573,7 @@ function modal(title,html){$("#modalTitle").textContent=title;$("#modalBody").in
 function closeModal(){$("#modalBackdrop").classList.add("hidden")}
 $("#closeModal").onclick=closeModal;$("#modalBackdrop").onclick=e=>{if(e.target.id==="modalBackdrop")closeModal()};
 function onboarding(){
-  modal("Create your Waypoint demo",`<div class="modal-note">This creates a local demo account only. No real email, payment or travel account is connected.</div><div class="onboarding-grid" style="margin-top:12px"><label>Your name<input id="obName" value="${escapeHtml(state.profile.name)}"></label><label>Email<input id="obEmail" value="${escapeHtml(state.profile.email)}"></label><label>Home airport<input id="obAirport" value="${escapeHtml(state.profile.airport)}"></label><label>Home currency<select id="obCurrency"><option>AUD</option><option>USD</option><option>GBP</option><option>HKD</option></select></label></div><label style="margin-top:10px">Choose a demo plan<select id="obPlan"><option value="Free">Free</option><option value="Monthly" selected>Monthly · $4.99</option><option value="Annual">Annual · $19.99</option></select></label><button class="primary full" id="finishOnboarding" style="margin-top:12px">Enter Waypoint</button>`);
+  modal("Create your Waypoint demo",`<div class="modal-note">This creates a local demo account only. No real email, payment or travel account is connected.</div><div class="onboarding-grid" style="margin-top:12px"><label>Your name<input id="obName" value="${escapeHtml(state.profile.name)}"></label><label>Email<input id="obEmail" value="${escapeHtml(state.profile.email)}"></label><label>Home airport<input id="obAirport" value="${escapeHtml(state.profile.airport)}"></label><label>Home currency<select id="obCurrency"><option>AUD</option><option>USD</option><option>GBP</option><option>HKD</option></select></label></div><label style="margin-top:10px">Choose a demo plan<select id="obPlan"><option value="Free">Free</option><option value="Monthly" selected>Monthly · $4.99</option><option value="Annual">Annual · $24.99</option></select></label><button class="primary full" id="finishOnboarding" style="margin-top:12px">Enter Waypoint</button>`);
   setTimeout(()=>{$("#obCurrency").value=state.profile.currency;$("#obPlan").value=state.plan},0)
 }
 $("#headerCta").onclick=onboarding;$("#heroStart").onclick=onboarding;
@@ -598,7 +599,7 @@ $("#shareDemoBtn").onclick=shareDemo;
 /* plans */
 function selectPlan(plan){
   if(plan==="Free"){state.plan=plan;save();renderAll();toast("Switched to Free");if($("#appView").classList.contains("hidden"))showApp("billing");return}
-  const price=plan==="Annual"?"A$19.99 / year":"A$4.99 / month";
+  const price=plan==="Annual"?"A$24.99 / year":"A$4.99 / month";
   modal(`Upgrade to ${plan}`,`<div class="test-badge">TEST CHECKOUT · NO REAL CHARGE</div><div class="checkout-summary"><div class="row"><span>Waypoint ${plan}</span><b>${price}</b></div><div class="row"><span>Due today</span><b>${price.split(" / ")[0]}</b></div></div><label>Name on card<input id="payName" value="Alex Morgan"></label><label>Card number<input id="payCard" inputmode="numeric" value="4242 4242 4242 4242"></label><div class="card-row"><label>Expiry<input id="payExpiry" value="12/30"></label><label>CVC<input id="payCvc" value="123"></label><label>Postcode<input id="payPostcode" value="2000"></label></div><button class="primary full" id="completeTestPayment" data-plan="${plan}">Complete test payment</button><p class="muted-text" style="font-size:11px;margin-top:10px">This V1 validates the checkout UX only. Stripe/real billing can replace this test step later.</p>`)
 }
 $$(".plan-btn").forEach(b=>b.onclick=()=>selectPlan(b.dataset.plan));
@@ -714,5 +715,6 @@ $("#simplePresetBtn").onclick=()=>setFeaturePreset("simple");$("#fullPresetBtn")
 
 renderAll();updateMap();routeFromHash();
 </script>
+  <script src="/waypoint-v2.js"></script>
 </body>
 </html>
