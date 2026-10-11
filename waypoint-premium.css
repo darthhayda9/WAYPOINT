@@ -252,3 +252,5 @@
 .wp3-brand-lockup>div:last-child small{font-size:11px;color:#bfd2dc}
 .wp3-brand-lockup .wp3-eyebrow{color:#7ad9d6}
 @media(max-width:780px){.wp3-brand-grid,.wp3-brand-lockup{grid-template-columns:1fr}.wp3-brand-visual{height:110px}.wp3-brand-lockup{padding:22px}.wp3-brand-lockup>div:last-child{min-height:140px}}
+
+.app-view .app-nav button>span{display:inline-block;width:auto;white-space:nowrap;line-height:1.2}.app-view .app-nav button>.wp3-nav-svg{flex-shrink:0}
