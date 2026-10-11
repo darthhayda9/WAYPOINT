@@ -1,0 +1,131 @@
+/* WAYPOINT V2 — accessible responsive application layer */
+:root{--wp2-ink:#f2f7ff;--wp2-soft:#acbdd0;--wp2-aqua:#68e5dc;--wp2-blue:#80a9ff;--wp2-outline:rgba(169,199,232,.15)}
+html{font-size:16px}
+body{background:#071322}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #6de7e0;outline-offset:3px}
+.app-view{grid-template-columns:218px minmax(0,1fr)}
+.app-sidebar{background:#091827;padding:24px 12px}
+.app-nav{gap:7px}
+.app-nav button{min-height:49px;padding:12px 14px;font-size:14px;border-radius:13px}
+.app-nav button[data-app]:not([data-app="dashboard"]):not([data-app="trips"]):not([data-app="map"]):not([data-app="assistant"]):not([data-app="more"]){display:none!important}
+.app-nav button[data-app="more"]{display:flex}
+.app-brand{padding-bottom:30px}
+.app-content{max-width:1190px;margin:auto;padding:34px 36px 96px}
+.app-topbar{height:73px;padding:0 35px}
+.app-page-title{font-size:19px}
+.app-page-sub{font-size:12px}
+#dashboardSection.wp2-ready>:not(#wp2Dashboard){display:none!important}
+#wp2Dashboard{display:grid;gap:22px}
+.wp2-eyebrow{display:flex;align-items:center;gap:9px;color:var(--wp2-aqua);font-size:11px;letter-spacing:.14em;font-weight:850;text-transform:uppercase}
+.wp2-eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--wp2-aqua)}
+.wp2-head{display:flex;gap:20px;justify-content:space-between;align-items:end}
+.wp2-head h1{font-size:clamp(30px,3.4vw,44px);font-weight:820;letter-spacing:-.055em;line-height:1.05;margin:12px 0 9px}
+.wp2-head p{color:var(--wp2-soft);font-size:15px;margin:0;line-height:1.55}
+.wp2-actions{display:flex;gap:9px;flex-wrap:wrap}
+.wp2-actions button{white-space:nowrap}
+.wp2-hero-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(285px,.7fr);gap:18px}
+.wp2-flight{position:relative;overflow:hidden;padding:24px 26px 22px;border-radius:22px;background:radial-gradient(circle at 85% 10%,rgba(102,190,231,.14),transparent 36%),linear-gradient(145deg,#153a5a,#0e2945);border:1px solid rgba(142,212,255,.14)}
+.wp2-card-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.wp2-pill{border:1px solid rgba(103,228,217,.28);background:rgba(89,215,209,.08);border-radius:999px;padding:6px 10px;color:#93f5e8;font-size:11px;font-weight:800}
+.wp2-flight h2{font-size:23px;letter-spacing:-.04em;margin:15px 0 1px}
+.wp2-route{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin:19px 0 24px}
+.wp2-route>div:last-child{text-align:right}
+.wp2-route strong{display:block;font-size:clamp(36px,4.5vw,55px);font-weight:850;letter-spacing:-.06em;line-height:1}
+.wp2-route small{display:block;font-size:12px;color:#b6cee4;margin-top:5px}
+.wp2-route-time{display:block;margin-top:14px;font-size:17px;font-weight:800}
+.wp2-route-mid{display:flex;align-items:center;gap:12px;color:#82dbe7}
+.wp2-route-mid:before,.wp2-route-mid:after{content:"";height:1px;width:35px;background:rgba(170,215,242,.4)}
+.wp2-flight-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:15px;border-top:1px solid rgba(205,230,249,.14)}
+.wp2-details{color:#bdd3e7;font-size:12px;line-height:1.6}
+.wp2-details b{color:#fff;font-size:13px}
+.wp2-flight-foot button{font-size:12px}
+.wp2-side{display:grid;gap:15px}
+.wp2-status-card,.wp2-plan,.wp2-action,.wp2-next,.wp2-more-card,.wp2-notice{background:linear-gradient(160deg,#11283f,#0d2136);border:1px solid var(--wp2-outline);border-radius:19px}
+.wp2-status-card{padding:21px;display:flex;flex-direction:column;justify-content:space-between}
+.wp2-status-card h3{font-size:17px;margin:9px 0 5px}
+.wp2-status-card p{color:var(--wp2-soft);font-size:13px;line-height:1.55;margin:0 0 14px}
+.wp2-status-card .wp2-inline{color:#9ed2ff;font-size:13px;font-weight:750;border:0;background:none;padding:0;text-align:left}
+.wp2-plan{padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.wp2-plan b{font-size:14px}
+.wp2-plan small{display:block;color:var(--wp2-soft);font-size:12px;margin-top:5px}
+.wp2-plan button{flex-shrink:0}
+.wp2-dots{display:flex;gap:5px;margin-top:10px}
+.wp2-dots i{width:20px;height:5px;background:#34475d;border-radius:10px}
+.wp2-dots i.used{background:#67dfd6}
+.wp2-subhead{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:4px 0 0}
+.wp2-subhead h2{font-size:20px;letter-spacing:-.035em;margin:0}
+.wp2-subhead p{color:var(--wp2-soft);font-size:13px;margin:5px 0 0}
+.wp2-action-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.wp2-action{padding:19px;text-align:left;min-height:155px;display:flex;flex-direction:column;align-items:flex-start;transition:border-color .2s,transform .2s;color:inherit;cursor:pointer}
+.wp2-action:hover{border-color:rgba(110,191,255,.45);transform:translateY(-2px)}
+.wp2-action .wp2-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:rgba(80,155,242,.12);color:#8dc7ff;font-size:18px;margin-bottom:14px}
+.wp2-action strong{font-size:15px}
+.wp2-action span:last-child{color:var(--wp2-soft);font-size:12px;line-height:1.5;margin-top:6px}
+.wp2-below{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.wp2-next{padding:20px 22px}
+.wp2-next h3{font-size:17px;letter-spacing:-.02em;margin:0 0 15px}
+.wp2-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.wp2-row:last-child{border:0}
+.wp2-row b{font-size:13px}.wp2-row small{font-size:12px;color:var(--wp2-soft)}
+.wp2-row button{background:transparent;border:0;color:#94c9ff;font-size:12px;font-weight:750}
+.wp2-more-intro{margin-bottom:26px}
+.wp2-more-intro h2{font-size:31px;letter-spacing:-.05em;margin:0 0 8px}
+.wp2-more-intro p{font-size:14px;color:var(--wp2-soft);margin:0}
+.wp2-more-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.wp2-more-card{display:flex;align-items:center;gap:15px;padding:19px 22px;color:#fff;text-align:left;width:100%;cursor:pointer}
+.wp2-more-card:hover{border-color:rgba(110,191,255,.5)}
+.wp2-more-card .wp2-icon{display:grid;place-items:center;flex-shrink:0;width:43px;height:43px;background:rgba(101,184,244,.13);border-radius:13px;font-size:19px}
+.wp2-more-card b{display:block;font-size:15px}
+.wp2-more-card small{display:block;color:var(--wp2-soft);font-size:12px;margin-top:4px;line-height:1.5}
+.wp2-more-card .wp2-arrow{margin-left:auto;color:#b4e3ff}
+.wp2-info-banner{padding:11px 15px;border:1px solid rgba(240,185,90,.18);border-radius:12px;background:rgba(232,172,68,.06);color:#cbd8e7;font-size:12px;line-height:1.55}
+.wp2-info-banner strong{color:#f8d798}
+#tripsSection .section-actions-row,#moneySection .section-actions-row{margin-bottom:25px}
+.trip-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.trip-card{min-height:229px;border-radius:19px}
+.trip-card h3{font-size:21px}
+.trip-card button{min-height:39px}
+#assistantSection .assistant-layout{gap:16px}
+#assistantSection .assistant-side{min-width:0}
+#assistantSection .chat-panel{min-height:580px}
+#chatMessages{scroll-behavior:smooth}
+.chat-msg{max-width:85%;line-height:1.6}
+.chat-msg.ai{max-width:93%}
+.chat-compose{gap:10px}
+.chat-compose input{font-size:15px;min-width:0}
+.wp2-ai-note{margin:12px 15px 0;padding:10px 12px;border:1px solid rgba(146,184,225,.14);background:rgba(118,170,227,.08);border-radius:11px;color:#bdcde2;font-size:12px;line-height:1.5}
+#assistantSection .assistant-side .suggestion{font-size:13px;line-height:1.5;min-height:44px;text-align:left}
+.wp2-demo-tag{font-weight:750;font-size:11px;color:#f3cf86}
+#billingSection .price-card{min-height:290px}
+#billingSection .price-card.featured{border-color:rgba(108,212,215,.5);outline:1px solid rgba(108,212,215,.28)}
+#billingSection .price-card ul{font-size:13px}
+#wp2BrandLabel{font-size:10px;font-weight:800;letter-spacing:.13em;color:#70e3dd;display:block;margin:2px 0 0 7px}
+@media(max-width:1100px){.wp2-hero-grid{grid-template-columns:1fr}.wp2-side{grid-template-columns:1fr 1fr}.wp2-action-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app-content{padding:28px 24px 95px}}
+@media(max-width:780px){
+ .app-view{display:block}.app-sidebar{position:fixed;z-index:70;top:auto;bottom:0;left:0;right:0;width:100%;height:calc(70px + env(safe-area-inset-bottom));padding:5px 5px env(safe-area-inset-bottom);background:rgba(9,22,37,.97);border-right:0;border-top:1px solid var(--wp2-outline);backdrop-filter:blur(18px)}
+ .app-sidebar .app-brand,.app-sidebar .sidebar-plan{display:none!important}
+ .app-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;height:100%}
+ .app-nav button[data-app="dashboard"],.app-nav button[data-app="trips"],.app-nav button[data-app="map"],.app-nav button[data-app="assistant"],.app-nav button[data-app="more"]{display:flex!important;justify-content:center;align-items:center;flex-direction:column;gap:2px;padding:5px 1px;font-size:10px;min-height:55px;border-radius:11px;text-align:center}
+ .app-nav button span{font-size:19px;width:auto;height:24px}
+ .app-topbar{height:66px;padding:0 17px}
+ .app-page-sub{max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .app-content{padding:20px 15px calc(92px + env(safe-area-inset-bottom))}
+ .wp2-head{align-items:flex-start;flex-direction:column}
+ .wp2-head h1{font-size:34px}.wp2-hero-grid,.wp2-side,.wp2-action-grid,.wp2-below,.wp2-more-grid,.trip-cards{grid-template-columns:1fr}
+ .wp2-flight{padding:21px 19px}.wp2-route strong{font-size:38px}
+ .wp2-route-mid{gap:5px}.wp2-route-mid:before,.wp2-route-mid:after{width:14px}
+ .wp2-flight-foot{align-items:flex-start;flex-direction:column}
+ .wp2-status-card{min-height:140px}
+ .wp2-plan{flex-direction:row}
+ #assistantSection .assistant-layout{display:flex;flex-direction:column}
+ #assistantSection .chat-panel{min-height:480px}
+ #assistantSection .assistant-side .suggestion-list{display:flex;overflow-x:auto;gap:8px;padding:5px 0 12px}
+ #assistantSection .assistant-side .suggestion{flex:0 0 210px}
+ .app-actions{gap:6px}.app-actions .ghost{display:none}
+ .detail-grid,.settings-grid,.money-summary,.loyalty-summary,.pricing-grid,.tool-grid,.two-col{grid-template-columns:1fr}
+ .section-actions-row{align-items:flex-start;flex-wrap:wrap}
+ .route-big{gap:8px}.route-big b{font-size:30px}
+ .flight-meta{grid-template-columns:repeat(2,1fr)}
+ .modal{max-width:calc(100vw - 24px);max-height:85vh;overflow:auto}
+}
+@media(prefers-reduced-motion:reduce){.wp2-action{transition:none}.wp2-action:hover{transform:none}}
