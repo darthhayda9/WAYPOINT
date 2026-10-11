@@ -105,7 +105,7 @@ module.exports=async function handler(req,res){
     try{
       const failure=await api.json();
       const raw=String(failure?.error?.code||failure?.error?.type||'').slice(0,80);
-      const recognised=['invalid_api_key','insufficient_quota','billing_hard_limit_reached','model_not_found','account_deactivated','rate_limit_exceeded','tokens'];
+      const recognised=['invalid_api_key','insufficient_quota','credit_balance_exhausted','organization_usage_limit_exceeded','billing_hard_limit_reached','model_not_found','account_deactivated','rate_limit_exceeded','tokens'];
       if(recognised.includes(raw))reason=raw;
     }catch(e){}
     return respond(res,502,{error:'AI provider did not accept the request',code:'provider_error',reason,provider_status:api.status});
