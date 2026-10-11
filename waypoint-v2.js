@@ -163,10 +163,46 @@
     var mapAsk=q('#mapAskAiBtn');if(mapAsk)mapAsk.onclick=function(){go('assistant');sendAI('Where is QF128 right now on the map?')};
     var pointsAsk=q('#askPointsBtn');if(pointsAsk)pointsAsk.onclick=function(){go('assistant');sendAI('How can Waypoint help me use my points?')};
   }
+  var aiQueuedQuestion='';
+  function showAIUnlock(){
+    modal('Unlock live AI',
+      '<p>Waypoint can use a real AI model for open-ended travel questions during the investor demo. Enter the access code provided by the demo owner.</p>'+
+      '<label>Investor access code<input id="wpAIInvestorCode" type="password" autocomplete="off" placeholder="Access code"></label>'+
+      '<p class="muted-text" style="font-size:12px">This code is held only in the current browser session. Never enter an OpenAI API key here.</p>'+
+      '<button class="primary full" id="wpAIApplyCode">Continue to AI</button>');
+  }
+  function aiGateInit(){
+    var head=q('#assistantSection .chat-head');
+    if(!head)return;
+    var button=document.createElement('button');
+    button.className='ghost small-btn';
+    button.id='wpAIUnlockButton';
+    button.textContent='Unlock live AI';
+    button.addEventListener('click',showAIUnlock);
+    head.appendChild(button);
+    document.addEventListener('click',function(e){
+      if(e.target.id==='wpAIApplyCode'){
+        var code=q('#wpAIInvestorCode')?.value.trim()||'';
+        if(code.length<14){toast('Enter your complete investor access code');return}
+        sessionStorage.setItem('waypointInvestorCode',code);
+        closeModal();
+        button.textContent='Change access code';
+        if(aiQueuedQuestion){var next=aiQueuedQuestion;aiQueuedQuestion='';sendAI(next)}
+        else toast('Access code saved for this session. Ask a question to verify it.');
+      }
+    });
+    var key=sessionStorage.getItem('waypointInvestorCode');
+    if(key)button.textContent='Change access code';
+    var status=q('#wp2AIStatus');
+    if(status)status.textContent='Real AI requires an investor access code. If unavailable, the local demo assistant still works without one.';
+  }
   async function sendAI(prefill){
     if(aiBusy)return;
     var input=q('#chatInput'),question=String(prefill||input.value||'').trim().slice(0,900);
     if(!question)return;
+    if(!sessionStorage.getItem('waypointInvestorCode')){
+      aiQueuedQuestion=question;showAIUnlock();return;
+    }
     input.value='';addMessage('user',question);state.wp2Chat=state.wp2Chat||[];
     state.wp2Chat.push({role:'user',content:question});state.wp2Chat=state.wp2Chat.slice(-24);save();
     aiBusy=true;q('#chatSend').disabled=true;
@@ -177,8 +213,12 @@
       var context={tripCount:state.trips.length,trips:state.trips.slice(0,8).map(function(t){return {title:t.title,route:t.route,dates:t.dates,flight:t.flight}}),refundReceived:!!state.refundReceived,flightStatus:'Sample flight — no live data',homeCurrency:state.profile.currency};
       var controller=new AbortController();var tm=setTimeout(function(){controller.abort()},12000);
       try{
-        var r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:recent,context:context}),signal:controller.signal});
+        var r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','x-waypoint-demo-code':sessionStorage.getItem('waypointInvestorCode')||''},body:JSON.stringify({messages:recent,context:context}),signal:controller.signal});
         if(r.ok){var body=await r.json();if(body&&typeof body.reply==='string'&&body.reply.length){answer=body.reply.slice(0,5000);real=body.mode==='ai'}}
+        else if(r.status===401){sessionStorage.removeItem('waypointInvestorCode');answer='That investor access code was not accepted. Select Unlock live AI and enter the correct code to retry.';var unlock=q('#wpAIUnlockButton');if(unlock)unlock.textContent='Unlock live AI';}
+        else if(r.status===429){answer='This investor demo has reached its AI usage limit for now. You can still use the trip and travel tools without the model.';}
+        else if(r.status===503){answer='The real AI connection has not been fully enabled yet. Please check the production environment settings.';}
+        else if(r.status===502){answer='The AI provider could not complete that request. Check the OpenAI project billing and try again.';}
       }finally{clearTimeout(tm)}
     }catch(e){}
     if(!answer)answer=fallbackAI(question);
@@ -192,7 +232,7 @@
     qa('#flightSection .checklist input').forEach(function(el,i){el.checked=!!(state.wp2Checklist&&state.wp2Checklist[i]);el.addEventListener('change',function(){state.wp2Checklist=state.wp2Checklist||{};state.wp2Checklist[i]=el.checked;save()})});
   }
   function boot(){
-    migrate();renderAll();markupHome();markupMore();billing();improveOnboarding();initAI();checklist();
+    migrate();renderAll();markupHome();markupMore();billing();improveOnboarding();initAI();aiGateInit();checklist();
     var title=q('#assistantSection .chat-head b');if(title)title.textContent='Waypoint Concierge';
     var brand=q('.app-brand');if(brand&&!q('#wp2BrandLabel')){var tag=document.createElement('div');tag.id='wp2BrandLabel';tag.textContent='TRAVEL, SIMPLIFIED';brand.appendChild(tag)}
     q('#wp2AddTrip').addEventListener('click',startNewTrip);
