@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#07111f" />
   <meta name="description" content="Waypoint V2 — travel less complicated. Three trips free. Flights, money, plans and AI in one beautifully simple travel app." />
-  <title>Waypoint V2 — Your AI Travel Companion</title>
+  <title>Waypoint — Travel made simple</title>
   <style>/* Waypoint full prototype */
 :root{
   --bg:#07111f;--bg2:#0b1727;--panel:#0f2135;--panel2:#132b45;--card:#142b45;
@@ -54,6 +54,8 @@
 </style>
   <link rel="stylesheet" href="/waypoint-v2.css" />
   <link rel="stylesheet" href="/waypoint-v2-extra.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/waypoint-premium.css" />
 
 <style id="wp-v2-landing">
 /* First-screen redesign — visibly different from V1, shared by all V2 deployments */
@@ -774,5 +776,8 @@ renderAll();updateMap();routeFromHash();
 </script>
   <script src="/waypoint-v2.js"></script>
   <script src="/waypoint-v2-extra.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/waypoint-connections.js"></script>
+  <script src="/waypoint-flight-replay.js"></script>
 </body>
 </html>
