@@ -232,3 +232,23 @@
  .wp3-connector{flex-wrap:wrap}.wp3-connector button{margin-left:52px}
 }
 @media(max-width:430px){.wp3-flight-id em{display:block;margin-left:0}.wp3-map-tools button{flex:1}.wp3-scrub{gap:8px}.wp3-telemetry strong{font-size:16px}.wp3-real-map{height:360px}}
+
+/* Logo review and positioning */
+.wp3-brand-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.wp3-brand-option{cursor:pointer;text-align:left;background:#fff;border:2px solid #e2e9ee;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:8px;color:#153c52;transition:border-color .18s,box-shadow .18s}
+.wp3-brand-option:hover{border-color:#a4cad0}
+.wp3-brand-option.selected{border-color:#23848d;box-shadow:0 0 0 3px rgba(50,145,153,.13)}
+.wp3-brand-visual{height:150px;background:#f2f7f8;border-radius:13px;display:grid;place-items:center;margin-bottom:5px}
+.wp3-brand-visual img{height:76px;width:76px}
+.wp3-brand-option strong{font-size:16px;color:#14364e}
+.wp3-brand-option small{font-size:12px;line-height:1.65;color:#718598;min-height:40px}
+.wp3-choice{font-size:12px;font-weight:800;color:#197685;padding-top:5px}
+.wp3-brand-lockup{display:grid;grid-template-columns:1.5fr 1fr;gap:30px;background:#123449;color:white;border-radius:22px;margin-top:20px;padding:42px}
+.wp3-brand-lockup h2{font-size:clamp(26px,3vw,42px);letter-spacing:-.05em;margin:10px 0}
+.wp3-brand-lockup p{font-size:14px;color:#bad1d9;max-width:530px;line-height:1.65}
+.wp3-brand-lockup>div:last-child{display:flex;flex-direction:column;justify-content:center;align-items:center;border:1px solid rgba(255,255,255,.17);border-radius:16px;gap:12px}
+.wp3-brand-lockup>div:last-child strong{font-size:24px;letter-spacing:.14em}
+.wp3-brand-lockup>div:last-child span{font-size:13px;color:#a6d3d7}
+.wp3-brand-lockup>div:last-child small{font-size:11px;color:#bfd2dc}
+.wp3-brand-lockup .wp3-eyebrow{color:#7ad9d6}
+@media(max-width:780px){.wp3-brand-grid,.wp3-brand-lockup{grid-template-columns:1fr}.wp3-brand-visual{height:110px}.wp3-brand-lockup{padding:22px}.wp3-brand-lockup>div:last-child{min-height:140px}}
